@@ -1,4 +1,4 @@
-import 'movie_entity.dart';
+import '../entities/movie_entity.dart';
 
 abstract interface class MovieRepository {
   Future<void> fetchMovies();

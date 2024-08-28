@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:movie_app_clean_architecture/domain/value_objects/poster_url.dart';
 
 final class MovieEntity extends Equatable {
   final int id;
   final String name;
-  final String poster;
+  final PosterUrl poster;
   final List<int> genreIds;
   final String overview;
   final double popularity;

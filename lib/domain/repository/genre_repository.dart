@@ -1,4 +1,4 @@
-import 'genre_entity.dart';
+import '../entities/genre_entity.dart';
 
 abstract interface class GenreRepository {
   Future<void> fetchGenres();
