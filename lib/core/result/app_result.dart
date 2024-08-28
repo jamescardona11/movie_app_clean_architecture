@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 import 'app_result_error.dart';
 import 'app_result_success.dart';
@@ -15,7 +16,10 @@ typedef ErrorCompletion<V, T> = T Function(V error);
 /// The fold method takes two functions as parameters, one for handling errors and one for handling success cases.
 /// It calls the appropriate function based on whether the result is an error or a success.
 
+@immutable
 abstract class AppResult<R> with EquatableMixin {
+  const AppResult();
+
   bool get isError => this is AppResultError;
   bool get isSuccess => this is AppResultSuccess<R>;
 
