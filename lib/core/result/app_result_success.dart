@@ -1,10 +1,10 @@
 part of 'app_result.dart';
 
 @immutable
-final class AppResultSuccess<R> extends AppResult<R> {
+final class AppSuccess<R> extends AppResult<R> {
   final R value;
 
-  const AppResultSuccess(this.value);
+  const AppSuccess(this.value);
 
   @override
   String toString() => 'AppResultSuccess: $value';

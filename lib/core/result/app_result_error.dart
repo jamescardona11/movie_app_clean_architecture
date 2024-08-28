@@ -1,10 +1,10 @@
 part of 'app_result.dart';
 
 @immutable
-final class AppResultError<R> extends AppResult<R> {
-  final AppError error;
+final class AppError<R> extends AppResult<R> {
+  final BaseAppError error;
 
-  const AppResultError(this.error);
+  const AppError(this.error);
 
   @override
   String toString() => 'AppResultError: $error';

@@ -1,6 +1,6 @@
 import 'package:movie_app_clean_architecture/config/environment/url_routes.dart';
 import 'package:movie_app_clean_architecture/core/domain/base_value_object.dart';
-import 'package:movie_app_clean_architecture/core/errors/app_error.dart';
+import 'package:movie_app_clean_architecture/core/errors/base_app_error.dart';
 import 'package:movie_app_clean_architecture/core/result/app_result.dart';
 
 /// This value object is responsible for validating the url of the poster.
@@ -16,10 +16,10 @@ final class PosterUrl extends BaseValueObject<String> {
 
     final notMatch = value.isEmpty ? true : RegExp(_urlPattern, caseSensitive: false).firstMatch(url) == null;
     if (notMatch) {
-      return const PosterUrl._(AppResultError(ValueObjectError()));
+      return const PosterUrl._(AppError(ValueObjectError()));
     }
 
-    return PosterUrl._(AppResultSuccess('${UrlRoutes.posterURL}$value'));
+    return PosterUrl._(AppSuccess('${UrlRoutes.posterURL}$value'));
   }
 
   static const String _urlPattern = r'^(?:http|https):\/\/'
