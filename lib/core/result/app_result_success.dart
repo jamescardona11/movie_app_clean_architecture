@@ -1,6 +1,4 @@
-import 'package:meta/meta.dart';
-
-import 'app_result.dart';
+part of 'app_result.dart';
 
 @immutable
 final class AppResultSuccess<R> extends AppResult<R> {

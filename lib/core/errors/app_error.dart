@@ -4,7 +4,7 @@ abstract base class AppError with EquatableMixin {
   final String message;
   final dynamic err;
 
-  AppError(this.message, [this.err]);
+  const AppError(this.message, [this.err]);
 
   @override
   String toString() {
@@ -16,5 +16,9 @@ abstract base class AppError with EquatableMixin {
 }
 
 final class UnexpectedError extends AppError {
-  UnexpectedError() : super('Encountered a Unexpected at an unrecoverable point. Terminating.');
+  const UnexpectedError() : super('Encountered a Unexpected at an unrecoverable point. Terminating.');
+}
+
+final class ValueObjectError extends AppError {
+  const ValueObjectError() : super('Encountered a Unexpected Value Object');
 }

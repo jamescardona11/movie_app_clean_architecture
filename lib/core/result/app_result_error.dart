@@ -1,7 +1,4 @@
-import 'package:meta/meta.dart';
-
-import '../errors/app_error.dart';
-import 'app_result.dart';
+part of 'app_result.dart';
 
 @immutable
 final class AppResultError<R> extends AppResult<R> {

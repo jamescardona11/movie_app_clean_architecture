@@ -20,5 +20,8 @@ abstract base class BaseValueObject<T> with EquatableMixin {
       }, (r) => r);
 
   @override
+  List<Object?> get props => _value.props;
+
+  @override
   String toString() => _value.toString();
 }

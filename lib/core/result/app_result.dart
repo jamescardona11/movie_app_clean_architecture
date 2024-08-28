@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'app_result_error.dart';
-import 'app_result_success.dart';
+import '../errors/app_error.dart';
+
+part 'app_result_error.dart';
+part 'app_result_success.dart';
 
 typedef SuccessCompletion<V, T> = T Function(V value);
 typedef ErrorCompletion<V, T> = T Function(V error);
