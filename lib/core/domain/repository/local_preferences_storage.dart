@@ -1,4 +1,4 @@
-abstract class LocalStorage {
+abstract class LocalPreferencesStorage {
   Future<bool> save<D>(String key, D value);
 
   Future<bool?> readBool(String key);

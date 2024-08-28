@@ -1,9 +1,8 @@
+import 'package:movie_app_clean_architecture/core/domain/repository/local_preferences_storage.dart';
 import 'package:movie_app_clean_architecture/core/errors/app_local_storage_error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'local_storage.dart';
-
-class AppSharedPreferences implements LocalStorage {
+class AppSharedPreferences implements LocalPreferencesStorage {
   const AppSharedPreferences(this.sharedPreferences);
 
   final SharedPreferences sharedPreferences;
