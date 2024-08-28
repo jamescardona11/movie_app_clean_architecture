@@ -1,18 +1,28 @@
 import 'package:equatable/equatable.dart';
 
-abstract base class BaseAppError with EquatableMixin {
+abstract class BaseAppError with EquatableMixin {
   final String message;
-  final dynamic err;
+  final dynamic error;
+  final StackTrace? stackTrace;
 
-  const BaseAppError(this.message, [this.err]);
+  const BaseAppError(this.message, {this.error, this.stackTrace});
 
   @override
   String toString() {
-    return Error.safeToString('$message; \n $err');
+    var msg = 'ErrorType [$runtimeType], \n message: $message,';
+    if (error is Error) {
+      msg += '\n${(error as Error).stackTrace}';
+    }
+    if (stackTrace != null) {
+      msg += '\nSource stack:\n$stackTrace';
+    }
+
+    //return Error.safeToString('$message; \n $error');
+    return Error.safeToString(msg);
   }
 
   @override
-  List<Object?> get props => [message, err];
+  List<Object?> get props => [message, error];
 }
 
 final class UnexpectedError extends BaseAppError {
