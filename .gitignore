@@ -71,3 +71,8 @@ env.g.dart
 .env.stage
 .env.prod
 .flutgenrc
+
+# mason
+.mason
+mason-lock.json
+mason.yaml
