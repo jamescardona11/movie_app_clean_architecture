@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'config/theme/app_theme.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,11 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      title: 'Movie App Clean Architecture',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.lightTheme,
       home: const HomePage(),
     );
   }
