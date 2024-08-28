@@ -16,7 +16,7 @@ abstract base class BaseValueObject<T> with EquatableMixin {
           return defaultValue;
         }
 
-        throw l.value;
+        throw l;
       }, (r) => r);
 
   @override

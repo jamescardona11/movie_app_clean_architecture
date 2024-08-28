@@ -2,13 +2,13 @@ part of 'app_result.dart';
 
 @immutable
 final class AppResultError<R> extends AppResult<R> {
-  final AppError value;
+  final AppError error;
 
-  const AppResultError(this.value);
-
-  @override
-  String toString() => 'AppResultError: $value';
+  const AppResultError(this.error);
 
   @override
-  List<Object?> get props => value.props;
+  String toString() => 'AppResultError: $error';
+
+  @override
+  List<Object?> get props => error.props;
 }

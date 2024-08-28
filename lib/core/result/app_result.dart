@@ -25,9 +25,9 @@ abstract class AppResult<R> with EquatableMixin {
   bool get isError => this is AppResultError;
   bool get isSuccess => this is AppResultSuccess<R>;
 
-  AppResultError? get toNullableError {
+  AppError? get toNullableError {
     if (isError) {
-      return this as AppResultError;
+      return (this as AppResultError).error;
     }
     return null;
   }
@@ -40,13 +40,13 @@ abstract class AppResult<R> with EquatableMixin {
   }
 
   /// Returns a new value of [Result] from closure
-  T fold<T>(ErrorCompletion<AppResultError, T> failure, SuccessCompletion<R, T> success) {
+  T fold<T>(ErrorCompletion<AppError, T> failure, SuccessCompletion<R, T> success) {
     if (isSuccess) {
       final right = this as AppResultSuccess<R>;
       return success(right.value);
     } else {
       final left = this as AppResultError;
-      return failure(left);
+      return failure(left.error);
     }
   }
 }
