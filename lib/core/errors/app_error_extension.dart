@@ -1,5 +1,5 @@
-import 'base_app_error.dart';
+import 'app_error.dart';
 
-extension AppErrorX on BaseAppError {
+extension AppErrorX on AppError {
   bool get isUnexpectedError => this is UnexpectedError;
 }

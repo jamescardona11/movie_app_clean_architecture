@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class BaseAppError with EquatableMixin {
+abstract class AppError with EquatableMixin {
   final String message;
   final dynamic error;
   final StackTrace? stackTrace;
 
-  const BaseAppError(this.message, {this.error, this.stackTrace});
+  const AppError(this.message, {this.error, this.stackTrace});
 
   @override
   String toString() {
@@ -25,10 +25,10 @@ abstract class BaseAppError with EquatableMixin {
   List<Object?> get props => [message, error];
 }
 
-final class UnexpectedError extends BaseAppError {
+final class UnexpectedError extends AppError {
   const UnexpectedError() : super('Encountered a Unexpected at an unrecoverable point. Terminating.');
 }
 
-final class ValueObjectError extends BaseAppError {
+final class ValueObjectError extends AppError {
   const ValueObjectError() : super('Encountered a Unexpected Value Object');
 }

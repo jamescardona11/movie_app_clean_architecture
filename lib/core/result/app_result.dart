@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../errors/base_app_error.dart';
+import '../errors/app_error.dart';
 
 part 'app_result_error.dart';
 part 'app_result_success.dart';
@@ -22,30 +22,33 @@ typedef ErrorCompletion<V, T> = T Function(V error);
 abstract class AppResult<R> with EquatableMixin {
   const AppResult();
 
-  bool get isError => this is AppError;
-  bool get isSuccess => this is AppSuccess<R>;
+  factory AppResult.failure(AppError error) => AppResultError(error);
+  factory AppResult.success(R value) => AppResultSuccess(value);
 
-  BaseAppError? get toNullableError {
+  bool get isError => this is AppResultError;
+  bool get isSuccess => this is AppResultSuccess<R>;
+
+  AppError? get toNullableError {
     if (isError) {
-      return (this as AppError).error;
+      return (this as AppResultError).error;
     }
     return null;
   }
 
   R? get toNullableSuccess {
     if (isSuccess) {
-      return (this as AppSuccess<R>).value;
+      return (this as AppResultSuccess<R>).value;
     }
     return null;
   }
 
   /// Returns a new value of [Result] from closure
-  T fold<T>(ErrorCompletion<BaseAppError, T> failure, SuccessCompletion<R, T> success) {
+  T fold<T>(ErrorCompletion<AppError, T> failure, SuccessCompletion<R, T> success) {
     if (isSuccess) {
-      final right = this as AppSuccess<R>;
+      final right = this as AppResultSuccess<R>;
       return success(right.value);
     } else {
-      final left = this as AppError;
+      final left = this as AppResultError;
       return failure(left.error);
     }
   }

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'base_app_error.dart';
+import 'app_error.dart';
 
-abstract class AppRemoteError extends BaseAppError {
+abstract class AppRemoteError extends AppError {
   final int? statusCode;
 
   const AppRemoteError(super.message, this.statusCode, {super.error, super.stackTrace});

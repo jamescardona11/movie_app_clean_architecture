@@ -1,5 +1,5 @@
+import 'package:movie_app_clean_architecture/core/errors/app_error.dart';
 import 'package:movie_app_clean_architecture/core/errors/app_remote_error.dart';
-import 'package:movie_app_clean_architecture/core/errors/base_app_error.dart';
 
 import 'base_http_client.dart';
 import 'http_request_endpoint.dart';
@@ -9,7 +9,7 @@ class HttpResult {
   final HttpRequestEndpoint originalRequest;
 
   // Error
-  final BaseAppError? appError;
+  final AppError? appError;
 
   // Response
   final dynamic data;
