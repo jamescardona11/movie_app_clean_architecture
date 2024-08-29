@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:movie_app_clean_architecture/core/logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,7 +12,7 @@ part 'base_moc_state_management.dart';
 /// the reason to create this is, the app is small and the state is simple
 /// so we can use the basic Bloc Pattern to manage the state
 
-abstract class Moc<MState> extends _BaseMoc<MState> {
+abstract class Moc<MState extends Equatable> extends _BaseMoc<MState> {
   Moc(super.initialState);
 
   final List<StreamSubscription> _subscriptions = [];

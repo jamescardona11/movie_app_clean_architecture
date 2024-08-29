@@ -1,15 +1,16 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
 import 'base/moc_state_management.dart';
 import 'moc_provider.dart';
 
-typedef MBuilder<M extends Moc<MState>, MState> = Widget Function(M moc, MState state);
+typedef MBuilder<M extends Moc<MState>, MState extends Equatable> = Widget Function(M moc, MState state);
 
 typedef MListener<M extends Moc, MState> = void Function(M moc, MState state);
 
-class MocBuilder<M extends Moc<MState>, MState> extends StatefulWidget {
+class MocBuilder<M extends Moc<MState>, MState extends Equatable> extends StatefulWidget {
   const MocBuilder({
     super.key,
     this.listener,
@@ -25,7 +26,7 @@ class MocBuilder<M extends Moc<MState>, MState> extends StatefulWidget {
   State<MocBuilder<M, MState>> createState() => _MocBuilderState<M, MState>();
 }
 
-class _MocBuilderState<M extends Moc<MState>, MState> extends State<MocBuilder<M, MState>> {
+class _MocBuilderState<M extends Moc<MState>, MState extends Equatable> extends State<MocBuilder<M, MState>> {
   StreamSubscription<MState>? _subscription;
   MState? _previousState;
   late M _moc;

@@ -3,7 +3,7 @@ part of 'moc_state_management.dart';
 /// This class is the base class for Moc (State Management)
 /// Contains the basic methods and properties for a Moc
 /// Define the eventController and stateController transformers
-abstract class _BaseMoc<MState> {
+abstract class _BaseMoc<MState extends Equatable> {
   _BaseMoc(this._initialState) {
     _state = _initialState;
 
@@ -65,7 +65,7 @@ abstract class _BaseMoc<MState> {
 
 ///  This abstract class is used to define a new [Event]
 ///  The Events are used to change the state of the [Moc]
-abstract class MocEvent<MState> {
+abstract class MocEvent<MState extends Equatable> {
   const MocEvent();
 
   @override
