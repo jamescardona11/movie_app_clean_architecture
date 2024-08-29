@@ -11,7 +11,9 @@ import 'package:movie_app_clean_architecture/core/data/remote/client/app_http_cl
 import 'package:movie_app_clean_architecture/core/domain/repository/app_shared_preferences.dart';
 import 'package:movie_app_clean_architecture/core/domain/repository/connectivity_provider.dart';
 import 'package:movie_app_clean_architecture/data/genres/genre_repository_impl.dart';
+import 'package:movie_app_clean_architecture/data/movies/movie_repository_impl.dart';
 import 'package:movie_app_clean_architecture/domain/repository/genre_repository.dart';
+import 'package:movie_app_clean_architecture/domain/repository/movie_repository.dart';
 import 'package:sembast/sembast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,6 +41,9 @@ abstract class DataModule {
 
   @Singleton(as: GenreRepository)
   GenreRepositoryImpl get genreRepository;
+
+  @Singleton(as: MovieRepository)
+  MovieRepositoryImpl get movieRepository;
 }
 
 FutureOr<void> disposeDependency(ConnectivityProvider provider) {

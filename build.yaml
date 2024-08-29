@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      injectable_generator:injectable_builder:
+        generate_for:
+          include:
+            - lib/di/**
+      json_serializable:
+        generate_for:
+          include:
+            - lib/data/**
+           
