@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'base/moc_state_management.dart';
+import 'moc_state_management.dart';
 
 /// MocProvider is a [InheritedWidget] that provides the [Moc] to its children
 /// The [Moc] is created using the [create] function
@@ -44,14 +44,6 @@ class MocProvider<M extends Moc> extends StatefulWidget {
   /// Method to watch changes in the [Moc] using the context
   static M watch<M extends Moc>(BuildContext context) {
     return of<M>(context, listen: true);
-  }
-
-  /// Method to dispatch an event to the [Moc] using the context
-  static void dispatch<M extends Moc>(
-    BuildContext context,
-    MocEvent event,
-  ) {
-    return of<M>(context).dispatch(event);
   }
 }
 

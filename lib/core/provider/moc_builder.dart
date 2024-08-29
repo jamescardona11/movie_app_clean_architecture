@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
-import 'base/moc_state_management.dart';
 import 'moc_provider.dart';
+import 'moc_state_management.dart';
 
 typedef MBuilder<M extends Moc<MState>, MState extends Equatable> = Widget Function(M moc, MState state);
 
