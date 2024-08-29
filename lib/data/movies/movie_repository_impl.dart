@@ -16,14 +16,13 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
   String get tableName => 'movies';
 
   @override
-  Future<void> createOrUpdate(MovieEntity movie) {
-    // TODO: implement createOrUpdate
-    throw UnimplementedError();
+  Future<AppResult<Unit>> fetchMovies() async {
+    return const AppResultSuccess(unit);
   }
 
   @override
-  Future<AppResult<Unit>> fetchMovies() {
-    // TODO: implement fetchMovies
+  Future<void> createOrUpdate(MovieEntity movie) {
+    // TODO: implement createOrUpdate
     throw UnimplementedError();
   }
 
