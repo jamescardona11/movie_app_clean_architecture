@@ -1,9 +1,11 @@
 import 'dart:developer' as developer;
 
-const logger = AppLogger();
-
 class AppLogger {
-  const AppLogger();
+  const AppLogger._();
+
+  factory AppLogger() => _instance;
+
+  static const AppLogger _instance = AppLogger._();
 
   void i(String? text, {String? tag, bool showTime = false}) {
     _log(text, _LogStatusInfo());
