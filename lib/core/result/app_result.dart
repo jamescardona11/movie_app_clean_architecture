@@ -50,3 +50,9 @@ abstract class AppResult<R> with EquatableMixin {
     }
   }
 }
+
+class Unit {
+  const Unit();
+}
+
+const unit = Unit();
