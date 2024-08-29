@@ -9,6 +9,7 @@ import 'package:rxdart/rxdart.dart';
 /// that is a basic Bloc Pattern to manage the state of the application
 /// the reason to create this is, the app is small and the state is simple
 /// so we can use the basic Bloc Pattern to manage the state
+/// Another options, bloc_library, provider, listenable, riverpod
 
 abstract class Moc<MState extends Equatable> {
   Moc(this._initialState) {
@@ -47,6 +48,8 @@ abstract class Moc<MState extends Equatable> {
 
   bool get isClosed => _stateController.isClosed;
 
+  /// When a new subscription is added, it is added to the list of subscriptions
+  /// This is to prevent memory leaks with subscriptions that are not closed when the provider is closed
   void safeSubscribe(StreamSubscription subscription) {
     _subscriptions.add(subscription);
   }
