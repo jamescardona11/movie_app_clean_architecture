@@ -9,7 +9,7 @@ final class MovieEntity extends Equatable {
   final String overview;
   final double popularity;
   final DateTime releaseDate;
-  final String languages;
+  final String language;
   final double voteAverage;
   final String status;
 
@@ -21,7 +21,7 @@ final class MovieEntity extends Equatable {
     required this.overview,
     required this.popularity,
     required this.releaseDate,
-    required this.languages,
+    required this.language,
     required this.voteAverage,
     required this.status,
   });
@@ -35,7 +35,7 @@ final class MovieEntity extends Equatable {
         overview,
         popularity,
         releaseDate,
-        languages,
+        language,
         voteAverage,
         status,
       ];
