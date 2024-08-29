@@ -5,53 +5,53 @@ import 'base/moc_state_management.dart';
 /// MocProvider is a [InheritedWidget] that provides the [Moc] to its children
 /// The [Moc] is created using the [create] function
 /// Children can access the [Moc] using the [Moc>Provider.of] method or using BuildContext extension
-typedef DCreate<D extends Moc> = D Function(BuildContext context);
+typedef MCreate<M extends Moc> = M Function(BuildContext context);
 
-class MocProvider<D extends Moc> extends StatefulWidget {
+class MocProvider<M extends Moc> extends StatefulWidget {
   const MocProvider({
     super.key,
     required this.create,
     required this.child,
   });
 
-  final DCreate<D> create;
+  final MCreate<M> create;
   final Widget child;
 
   @override
-  State<MocProvider<D>> createState() => _MocProviderState<D>();
+  State<MocProvider<M>> createState() => _MocProviderState<M>();
 
-  static D of<D extends Moc>(BuildContext context, {bool listen = false}) {
-    if (D == dynamic) {
+  static M of<M extends Moc>(BuildContext context, {bool listen = false}) {
+    if (M == dynamic) {
       throw _ProviderError();
     }
 
     final provider = listen
-        ? context.dependOnInheritedWidgetOfExactType<_MocProviderIW<D>>()
-        : (context.getElementForInheritedWidgetOfExactType<_MocProviderIW<D>>()?.widget as _MocProviderIW<D>?);
+        ? context.dependOnInheritedWidgetOfExactType<_MocProviderIW<M>>()
+        : (context.getElementForInheritedWidgetOfExactType<_MocProviderIW<M>>()?.widget as _MocProviderIW<M>?);
 
     if (provider == null) {
-      throw _ProviderError(D);
+      throw _ProviderError(M);
     }
 
     return provider.moc;
   }
 
   /// Method to access to the [Moc] using the context
-  static D read<D extends Moc>(BuildContext context) {
-    return of<D>(context);
+  static M read<M extends Moc>(BuildContext context) {
+    return of<M>(context);
   }
 
   /// Method to watch changes in the [Moc] using the context
-  static D watch<D extends Moc>(BuildContext context) {
-    return of<D>(context, listen: true);
+  static M watch<M extends Moc>(BuildContext context) {
+    return of<M>(context, listen: true);
   }
 
   /// Method to dispatch an event to the [Moc] using the context
-  static void dispatch<D extends Moc>(
+  static void dispatch<M extends Moc>(
     BuildContext context,
     MocEvent event,
   ) {
-    return of<D>(context).dispatch(event);
+    return of<M>(context).dispatch(event);
   }
 }
 
