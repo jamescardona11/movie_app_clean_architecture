@@ -19,29 +19,30 @@ class SplashController extends Moc<SplashState> {
     this._movieRepository,
     this._connectivityProvider,
     this._appSharedPreferences,
-  ) : super(SplashState());
+  ) : super(const SplashState());
 
   // this method is called when the app is started
   // it is used to initialize the app and set the initial state
   Future<void> init() async {
-    unawaited(_appSetup());
-  }
-
-  Future<void> _appSetup() async {
     final isFirstTime = await _appSharedPreferences.isFirstTime;
     final isConnected = await _connectivityProvider.hasConnection;
 
     if (isFirstTime && isConnected) {
-      final result = await Future.wait([
+      final results = await Future.wait([
         _movieRepository.fetchMovies(),
         _genreRepository.fetchGenres(),
       ]);
 
-      await _appSharedPreferences.setFirstTimeDone();
+      if (results.every((element) => element.isSuccess)) {
+        await _appSharedPreferences.setFirstTimeDone();
+      }
     } else if (isConnected) {
-      await _movieRepository.fetchMovies();
-    } else {
-      // yield SplashState.error();
+      final result = await _movieRepository.fetchMovies();
+      if (result.isError) {
+        await _appSharedPreferences.setLastDataOld();
+      }
     }
+
+    changeState(state.copyWith(isLoading: false));
   }
 }
