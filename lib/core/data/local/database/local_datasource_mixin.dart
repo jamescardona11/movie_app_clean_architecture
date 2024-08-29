@@ -7,9 +7,9 @@ mixin LocalDataSourceMixin {
 
   Database get database;
 
-  StoreRef<String, JsonType> get store => StoreRef<String, JsonType>(tableName);
+  StoreRef<String, JsonType> get _store => StoreRef<String, JsonType>(tableName);
 
-  Future<void> upsert(DbDAO dao) => store.record(dao.id).put(
+  Future<void> upsert(DbDAO dao) => _store.record(dao.id).put(
         database,
         dao.data,
         merge: true,
@@ -20,7 +20,7 @@ mixin LocalDataSourceMixin {
     final data = daos.map((item) => item.data).toList();
 
     return database.transaction((transaction) async {
-      await store.records(ids).put(
+      await _store.records(ids).put(
             transaction,
             data,
             merge: true,
@@ -28,9 +28,9 @@ mixin LocalDataSourceMixin {
     });
   }
 
-  Future<void> delete(String id) => store.record(id).delete(database);
+  Future<void> delete(String id) => _store.record(id).delete(database);
 
-  Future<DbDAO?> read(String id) => store.record(id).get(database).then((record) {
+  Future<DbDAO?> read(String id) => _store.record(id).get(database).then((record) {
         if (record == null) return null;
 
         return DbDAO(
@@ -39,7 +39,7 @@ mixin LocalDataSourceMixin {
         );
       });
 
-  Stream<DbDAO?> watchOne(String id) => store.record(id).onSnapshot(database).map(
+  Stream<DbDAO?> watchOne(String id) => _store.record(id).onSnapshot(database).map(
         (snapshot) => snapshot == null
             ? null
             : DbDAO(
@@ -48,7 +48,7 @@ mixin LocalDataSourceMixin {
               ),
       );
 
-  Stream<List<DbDAO>> watch([Finder? finder]) => store.query(finder: finder).onSnapshots(database).map(
+  Stream<List<DbDAO>> watch([Finder? finder]) => _store.query(finder: finder).onSnapshots(database).map(
         (snapshots) => snapshots
             .map(
               (e) => DbDAO(
@@ -59,5 +59,5 @@ mixin LocalDataSourceMixin {
             .toList(),
       );
 
-  Future<void> dropTable() => store.drop(database);
+  Future<void> dropTable() => _store.drop(database);
 }
