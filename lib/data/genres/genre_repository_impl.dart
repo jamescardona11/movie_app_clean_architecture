@@ -18,7 +18,7 @@ final class GenreRepositoryImpl with LocalDataSourceMixin implements GenreReposi
   Future<void> fetchGenres() async {}
 
   @override
-  Future<void> updateOrCreate(List<GenreEntity> genres) {
+  Future<void> createOrUpdate(List<GenreEntity> genres) {
     // TODO: implement upsert
     throw UnimplementedError();
   }

@@ -5,5 +5,5 @@ abstract interface class GenreRepository {
 
   Stream<List<GenreEntity>> watchGenres();
 
-  Future<void> updateOrCreate(List<GenreEntity> genres);
+  Future<void> createOrUpdate(List<GenreEntity> genres);
 }

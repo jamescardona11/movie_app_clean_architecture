@@ -1,4 +1,4 @@
-import '../entities/movie_entity.dart';
+import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
 
 abstract interface class MovieRepository {
   Future<void> fetchMovies();
@@ -9,7 +9,5 @@ abstract interface class MovieRepository {
 
   Stream<MovieEntity?> watchMovieById(int id);
 
-  Future<void> upsertMovie(MovieEntity movie);
-
-  Future<void> deleteMovie(int id);
+  Future<void> createOrUpdate(MovieEntity movie);
 }
