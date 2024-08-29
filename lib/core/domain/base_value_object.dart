@@ -11,13 +11,16 @@ abstract base class BaseValueObject<T> with EquatableMixin {
   bool get isValid => _value.isSuccess;
 
   /// Returns the value if it is valid, otherwise throws an error.
-  T getOrElse([T? defaultValue]) => _value.fold((l) {
-        if (defaultValue != null) {
-          return defaultValue;
-        }
+  T getOrElse([T? defaultValue]) => _value.fold(
+        (l) {
+          if (defaultValue != null) {
+            return defaultValue;
+          }
 
-        throw l;
-      }, (r) => r);
+          throw l;
+        },
+        (r) => r,
+      );
 
   @override
   List<Object?> get props => _value.props;
