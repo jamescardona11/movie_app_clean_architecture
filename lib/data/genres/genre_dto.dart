@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movie_app_clean_architecture/core/data/local/database/base_dto.dart';
+import 'package:movie_app_clean_architecture/core/data/local/base_dto.dart';
+import 'package:movie_app_clean_architecture/core/domain/types/json_type.dart';
 
 part 'genre_dto.g.dart';
 
@@ -19,8 +20,8 @@ class GenreDto implements BaseDTO {
   @override
   String get dbID => id.toString();
 
-  factory GenreDto.fromJson(Map<String, dynamic> json) => _$GenreDtoFromJson(json);
+  factory GenreDto.fromJson(JsonType json) => _$GenreDtoFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$GenreDtoToJson(this);
+  JsonType toJson() => _$GenreDtoToJson(this);
 }
