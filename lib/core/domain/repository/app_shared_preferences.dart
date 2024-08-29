@@ -4,4 +4,7 @@ abstract interface class AppSharedPreferences {
 
   Future<bool> get movieItemsViewIsList;
   Future<void> changeMovieItemView();
+
+  Future<void> get isLastDataOld;
+  Future<void> setLastDataOld();
 }

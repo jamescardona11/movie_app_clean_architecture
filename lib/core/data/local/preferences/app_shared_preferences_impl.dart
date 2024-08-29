@@ -9,6 +9,7 @@ class AppSharedPreferencesImpl implements AppSharedPreferences {
 
   static const String _firstTimeKey = 'first_time';
   static const String _movieItemsViewIsListKey = 'movie_items_view_is_list';
+  static const String _lastDataOldKey = 'last_data_old';
 
   @override
   Future<bool> get isFirstTime => _localSharedPreferencesAdapter.readBool(_firstTimeKey).then((value) => value ?? true);
@@ -24,4 +25,10 @@ class AppSharedPreferencesImpl implements AppSharedPreferences {
     final isList = await movieItemsViewIsList;
     await _localSharedPreferencesAdapter.save(_movieItemsViewIsListKey, !isList);
   }
+
+  @override
+  Future<void> get isLastDataOld => _localSharedPreferencesAdapter.readBool(_lastDataOldKey).then((value) => value ?? false);
+
+  @override
+  Future<void> setLastDataOld() => _localSharedPreferencesAdapter.save(_lastDataOldKey, true);
 }
