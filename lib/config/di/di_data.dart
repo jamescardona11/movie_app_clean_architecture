@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:movie_app_clean_architecture/config/environment/env.dart';
 import 'package:movie_app_clean_architecture/core/data/local/connectivity_provider_impl.dart';
 import 'package:movie_app_clean_architecture/core/data/local/database/sembast_db_init.dart';
 import 'package:movie_app_clean_architecture/core/data/local/preferences/app_shared_preferences_impl.dart';
@@ -34,7 +35,7 @@ abstract class DataModule {
   AppSharedPreferencesImpl get appSharedPreferences;
 
   @singleton
-  BaseHttpClient httpClient() => AppHttpClient(http.Client());
+  BaseHttpClient httpClient() => AppHttpClient(http.Client(), Env.movieApiKey);
 
   @Singleton(as: ConnectivityProvider, dispose: disposeDependency)
   ConnectivityProviderImpl get connectivityProvider;

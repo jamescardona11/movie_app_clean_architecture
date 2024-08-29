@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_clean_architecture/config/di/di.dart';
 
 import 'config/theme/app_theme.dart';
 import 'presentation/pages/splash/splash_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
