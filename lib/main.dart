@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'config/theme/app_theme.dart';
+import 'presentation/pages/splash/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie App Clean Architecture',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }

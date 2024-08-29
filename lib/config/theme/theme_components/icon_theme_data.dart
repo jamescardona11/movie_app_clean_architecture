@@ -6,14 +6,14 @@ abstract class AppIconTheme {
   static IconThemeData iconTheme() {
     return IconThemeData(
       color: AppColors.primaryColor,
-      size: AppDimens.size20,
+      size: Dimens.size20,
     );
   }
 
   static IconThemeData noSelectedIconTheme() {
     return IconThemeData(
       color: AppColors.primaryColor.withOpacity(0.4),
-      size: AppDimens.size20,
+      size: Dimens.size20,
     );
   }
 }
