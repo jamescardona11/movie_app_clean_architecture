@@ -8,7 +8,7 @@ import 'package:movie_app_clean_architecture/domain/repository/genre_repository.
 
 @module
 abstract class DataModule {
-  @LazySingleton(as: ConnectivityProvider, dispose: disposeProvider)
+  @Singleton(as: ConnectivityProvider, dispose: disposeProvider)
   ConnectivityProviderImpl get connectivityProvider;
 
   @Singleton(as: GenreRepository)
