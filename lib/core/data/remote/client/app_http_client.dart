@@ -7,10 +7,10 @@ import '../base_http_client.dart';
 import '../http_request_endpoint.dart';
 import '../http_result.dart';
 
-class HttpClient extends BaseHttpClient {
-  HttpClient() : super();
+class AppHttpClient extends BaseHttpClient {
+  AppHttpClient(this._httpClient) : super();
 
-  final http.Client _httpClient = http.Client();
+  final http.Client _httpClient;
 
   @override
   Future<HttpResult> createRequest(HttpRequestEndpoint request) async {

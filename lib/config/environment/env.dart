@@ -3,4 +3,7 @@ import 'package:envied/envied.dart';
 part 'env.g.dart';
 
 @Envied(path: '.env')
-abstract final class Env {}
+abstract class Env {
+  @EnviedField(varName: 'MOVIE_API_KEY', obfuscate: true)
+  static String movieApiKey = _Env.movieApiKey;
+}
