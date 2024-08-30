@@ -210,5 +210,5 @@ class _BottomBarItemState extends State<_BottomBarItem> with SingleTickerProvide
     super.dispose();
   }
 
-  Color get iconColor => widget.isSelected ? AppColors.primaryColor : AppColors.secondaryColor;
+  Color get iconColor => widget.isSelected ? AppColors.primaryColor : Colors.grey;
 }
