@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
+import 'package:movie_app_clean_architecture/config/navigation/navigation_service.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
 import 'package:movie_app_clean_architecture/config/theme/theme.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
@@ -41,7 +42,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       child: MocBuilder<SplashController, SplashState>(
         listener: (moc, state) {
           if (!state.isLoading) {
-            // goToHome();
+            goToHome();
           }
         },
         builder: (moc, state) => Scaffold(
@@ -65,6 +66,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  void goToHome() {
+    NavigationService().goTo(NavigationService.home);
   }
 
   @override

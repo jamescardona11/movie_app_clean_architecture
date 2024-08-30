@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
+import 'package:movie_app_clean_architecture/config/navigation/navigation_service.dart';
 
 import 'config/theme/app_theme.dart';
-import 'presentation/pages/splash/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,25 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Movie App Clean Architecture',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const SplashPage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AppBar Text'),
-      ),
-      body: Container(
-        child: const Text('HomePage'),
-      ),
+      onGenerateRoute: NavigationService.generateRoutes,
+      navigatorKey: NavigationService().navigatorKey,
+      initialRoute: NavigationService.splash,
     );
   }
 }
