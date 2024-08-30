@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/detail/movie_detail_page.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/home/home_page.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/intro/intro_page.dart';
 
@@ -25,6 +26,18 @@ class NavigationService {
       case home:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return child;
+          },
+        );
+      case detail:
+        final id = (settings.arguments as Map)['id'] as int;
+        final isPopular = (settings.arguments as Map)['isPopular'] as bool? ?? false;
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => MovieDetailPage(
+            id: id,
+            isPopular: isPopular,
+          ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return child;
           },

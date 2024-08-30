@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movie_app_clean_architecture/config/navigation/navigation_service.dart';
 import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/cached_image.dart';
 
@@ -16,7 +17,15 @@ class MovieListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        NavigationService().pushTo(
+          NavigationService.detail,
+          arguments: {
+            'id': movie.id,
+            'isPopular': true,
+          },
+        );
+      },
       child: SizedBox(
         height: 147,
         width: MediaQuery.of(context).size.width,
