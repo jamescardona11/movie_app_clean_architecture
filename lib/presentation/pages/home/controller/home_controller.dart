@@ -17,5 +17,17 @@ class HomeController extends Moc<HomeState> {
 
   // this method is called when the app is started
   // it is used to initialize the app and set the initial state
-  Future<void> init() async {}
+  Future<void> init() async {
+    safeSubscribe(
+      _movieRepository.watchMostPopularMovies().listen((event) {
+        changeState(state.copyWith(popularMovies: event));
+      }),
+    );
+
+    safeSubscribe(
+      _movieRepository.watchMostNowPlayingMovies().listen((event) {
+        changeState(state.copyWith(nowPlaying: event));
+      }),
+    );
+  }
 }
