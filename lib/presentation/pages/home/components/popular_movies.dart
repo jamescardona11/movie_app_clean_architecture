@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/home/widgets/movies_header_view.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/home/widgets/movies_list_widget.dart';
+
+class PopularMovies extends StatelessWidget {
+  const PopularMovies({
+    super.key,
+    required this.movies,
+  });
+
+  final List<MovieEntity> movies;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: CustomScrollView(
+        slivers: [
+          const MoviesHeaderView(
+            title: 'Most Popular',
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 40),
+            sliver: MoviesListWidget(movies: movies),
+          ),
+        ],
+      ),
+    );
+  }
+}
