@@ -1,6 +1,9 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movie_app_clean_architecture/core/data/local/base_dto.dart';
 import 'package:movie_app_clean_architecture/core/domain/types/json_type.dart';
+import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:movie_app_clean_architecture/domain/value_objects/url_vo.dart';
 
 part 'movie_dto.g.dart';
 
@@ -16,7 +19,7 @@ class MovieDto implements BaseDTO {
   final String? posterPath;
 
   @JsonKey(name: 'genres')
-  final List<String> genreIds;
+  final List<int> genreIds;
 
   final String overview;
 
@@ -27,10 +30,13 @@ class MovieDto implements BaseDTO {
   final String language;
 
   @JsonKey(name: 'vote_average')
-  final double voteAverage;
+  final double rating;
 
   @JsonKey(name: 'status')
   final String? status;
+
+  @JsonKey(name: 'popularity')
+  final double? popularity;
 
   const MovieDto({
     required this.id,
@@ -40,11 +46,25 @@ class MovieDto implements BaseDTO {
     required this.overview,
     required this.releaseDate,
     required this.language,
-    required this.voteAverage,
+    required this.rating,
     required this.status,
+    required this.popularity,
   });
 
   static String get idKey => 'id';
+
+  MovieEntity toEntity() => MovieEntity(
+        id: id,
+        name: name,
+        imageUrl: UrlVO.def(posterPath),
+        genreIds: genreIds,
+        overview: overview,
+        releaseDate: DateFormat('yyyy-MM-dd').tryParse(releaseDate),
+        language: language,
+        rating: rating,
+        status: status,
+        popularity: popularity,
+      );
 
   @override
   String get dbID => id.toString();

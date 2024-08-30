@@ -11,10 +11,10 @@ import 'package:movie_app_clean_architecture/core/result/app_result.dart';
 final class UrlVO extends BaseValueObject<String> {
   const UrlVO._(super.value);
 
-  factory UrlVO.def(String value) {
+  factory UrlVO.def(String? value) {
     final url = '${UrlRoutes.posterURL}$value';
 
-    final notMatch = value.isEmpty ? true : RegExp(_urlPattern, caseSensitive: false).firstMatch(url) == null;
+    final notMatch = value == null || value.isEmpty ? true : RegExp(_urlPattern, caseSensitive: false).firstMatch(url) == null;
     if (notMatch) {
       return const UrlVO._(AppResultError(ValueObjectError()));
     }

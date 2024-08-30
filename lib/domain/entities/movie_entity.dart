@@ -7,11 +7,11 @@ final class MovieEntity extends Equatable {
   final UrlVO imageUrl;
   final List<int> genreIds;
   final String overview;
-  final double popularity;
-  final DateTime releaseDate;
+  final double? popularity;
+  final DateTime? releaseDate;
   final String language;
   final double rating;
-  final String status;
+  final String? status;
 
   const MovieEntity({
     required this.id,
