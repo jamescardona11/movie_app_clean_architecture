@@ -8,18 +8,18 @@ import 'package:movie_app_clean_architecture/core/result/app_result.dart';
 ///
 /// The goal here is to create and show an example of how to use value objects, and how to validate data.
 /// We need to evaluate if this kind of Value Object is the right choice, we don't want to use many Value Objects without any reason.
-final class PosterUrl extends BaseValueObject<String> {
-  const PosterUrl._(super.value);
+final class UrlVO extends BaseValueObject<String> {
+  const UrlVO._(super.value);
 
-  factory PosterUrl.def(String value) {
+  factory UrlVO.def(String value) {
     final url = '${UrlRoutes.posterURL}$value';
 
     final notMatch = value.isEmpty ? true : RegExp(_urlPattern, caseSensitive: false).firstMatch(url) == null;
     if (notMatch) {
-      return const PosterUrl._(AppResultError(ValueObjectError()));
+      return const UrlVO._(AppResultError(ValueObjectError()));
     }
 
-    return PosterUrl._(AppResultSuccess('${UrlRoutes.posterURL}$value'));
+    return UrlVO._(AppResultSuccess('${UrlRoutes.posterURL}$value'));
   }
 
   static const String _urlPattern = r'^(?:http|https):\/\/'

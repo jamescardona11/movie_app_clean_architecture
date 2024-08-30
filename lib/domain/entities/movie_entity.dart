@@ -1,28 +1,28 @@
 import 'package:equatable/equatable.dart';
-import 'package:movie_app_clean_architecture/domain/value_objects/poster_url.dart';
+import 'package:movie_app_clean_architecture/domain/value_objects/url_vo.dart';
 
 final class MovieEntity extends Equatable {
   final int id;
   final String name;
-  final PosterUrl poster;
+  final UrlVO imageUrl;
   final List<int> genreIds;
   final String overview;
   final double popularity;
   final DateTime releaseDate;
   final String language;
-  final double voteAverage;
+  final double rating;
   final String status;
 
   const MovieEntity({
     required this.id,
     required this.name,
-    required this.poster,
+    required this.imageUrl,
     this.genreIds = const [],
     required this.overview,
     required this.popularity,
     required this.releaseDate,
     required this.language,
-    required this.voteAverage,
+    required this.rating,
     required this.status,
   });
 
@@ -30,13 +30,13 @@ final class MovieEntity extends Equatable {
   List<Object?> get props => [
         id,
         name,
-        poster,
+        imageUrl,
         genreIds,
         overview,
         popularity,
         releaseDate,
         language,
-        voteAverage,
+        rating,
         status,
       ];
 }
