@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
-import 'package:movie_app_clean_architecture/core/widgets/app_icon.dart';
+import 'package:movie_app_clean_architecture/presentation/widgets/app_icon.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({
