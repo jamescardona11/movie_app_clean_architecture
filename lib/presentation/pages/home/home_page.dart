@@ -6,9 +6,9 @@ import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bee_bottom_bar.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bottom_bar_item.dart';
 
+import 'components/popular_movies.dart';
 import 'controller/home_controller.dart';
 import 'controller/home_state.dart';
-import 'related_search_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -25,53 +25,7 @@ class HomePage extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Most Popular',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 32,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: const EdgeInsets.only(top: 40),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: RelatedSeachWidget(
-                                  movie: state.movies[index],
-                                ),
-                              );
-                            },
-                            childCount: state.movies.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                child: PopularMovies(movies: state.popularMovies),
               ),
             ),
             bottomNavigationBar: AppBottomBar(
