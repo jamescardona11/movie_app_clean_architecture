@@ -26,6 +26,8 @@ final class MovieEntity extends Equatable {
     required this.status,
   });
 
+  String? get year => releaseDate?.year.toString();
+
   @override
   List<Object?> get props => [
         id,

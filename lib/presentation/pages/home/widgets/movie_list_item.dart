@@ -1,10 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/navigation/navigation_service.dart';
 import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/cached_image.dart';
+import 'package:movie_app_clean_architecture/presentation/widgets/rating_widget.dart';
 
 class MovieListItem extends StatelessWidget {
   const MovieListItem({
@@ -55,39 +54,8 @@ class MovieListItem extends StatelessWidget {
                   top: 5,
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
-                            ),
-                            child: ColoredBox(
-                              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
-                              child: SizedBox(
-                                height: 24,
-                                width: 55,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    FaIcon(
-                                      FontAwesomeIcons.star,
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      movie.rating.toStringAsFixed(2),
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Theme.of(context).colorScheme.secondaryContainer,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      RatingWidget(
+                        rating: movie.rating.toStringAsFixed(2),
                       ),
                     ],
                   ),
