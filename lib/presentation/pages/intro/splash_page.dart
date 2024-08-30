@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
 import 'package:movie_app_clean_architecture/config/navigation/navigation_service.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
-import 'package:movie_app_clean_architecture/config/theme/theme.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/core/widgets/app_icon.dart';
 
-import 'controller/splash_controller.dart';
-import 'controller/splash_state.dart';
+import 'controller/intro_controller.dart';
+import 'controller/intro_state.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -38,27 +38,33 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MocProvider(
-      create: (context) => getIt<SplashController>()..init(),
-      child: MocBuilder<SplashController, SplashState>(
+      create: (context) => getIt<IntroController>()..init(),
+      child: MocBuilder<IntroController, IntroState>(
         listener: (moc, state) {
           if (!state.isLoading) {
-            goToHome();
+            // goToHome();
           }
         },
         builder: (moc, state) => Scaffold(
           body: Center(
             child: SizedBox(
-              width: Dimens.size80,
-              height: Dimens.size80,
               child: Column(
                 children: [
-                  const AppIcon(size: 60),
-                  const SizedBox(height: Dimens.size12),
-                  LinearProgressIndicator(
-                    value: controller.value,
-                    color: AppColors.primaryColor,
-                    semanticsLabel: 'progress indicator',
+                  const Spacer(),
+                  const Padding(
+                    padding: EdgeInsets.only(top: Dimens.size60, bottom: Dimens.size12),
+                    child: AppIcon(size: Dimens.size60),
                   ),
+                  Text(
+                    'Moc App',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: 120,
+                    child: Lottie.asset(AppAssets.lottieLoader),
+                  ),
+                  const SizedBox(height: Dimens.size60),
                 ],
               ),
             ),

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-class SplashState extends Equatable {
+class IntroState extends Equatable {
   final bool isLoading;
 
-  const SplashState({
+  const IntroState({
     this.isLoading = true,
   });
 
@@ -12,10 +12,10 @@ class SplashState extends Equatable {
         isLoading,
       ];
 
-  SplashState copyWith({
+  IntroState copyWith({
     bool? isLoading,
   }) {
-    return SplashState(
+    return IntroState(
       isLoading: isLoading ?? this.isLoading,
     );
   }

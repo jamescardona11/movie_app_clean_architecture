@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/home/home_page.dart';
-import 'package:movie_app_clean_architecture/presentation/pages/splash/splash_page.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/intro/intro_page.dart';
 
 class NavigationService {
   NavigationService._();
@@ -14,14 +14,14 @@ class NavigationService {
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static const String splash = '/';
+  static const String intro = '/';
   static const String home = '/home';
   static const String detail = '/detail';
 
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case splash:
-        return MaterialPageRoute(builder: (context) => const SplashPage());
+      case intro:
+        return MaterialPageRoute(builder: (context) => const IntroPage());
       case home:
         return MaterialPageRoute(builder: (context) => const HomePage());
 

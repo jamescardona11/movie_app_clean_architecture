@@ -6,20 +6,20 @@ import 'package:movie_app_clean_architecture/core/provider/moc_state_management.
 import 'package:movie_app_clean_architecture/domain/repository/genre_repository.dart';
 import 'package:movie_app_clean_architecture/domain/repository/movie_repository.dart';
 
-import 'splash_state.dart';
+import 'intro_state.dart';
 
-class SplashController extends Moc<SplashState> {
+class IntroController extends Moc<IntroState> {
   final GenreRepository _genreRepository;
   final MovieRepository _movieRepository;
   final ConnectivityProvider _connectivityProvider;
   final AppSharedPreferences _appSharedPreferences;
 
-  SplashController(
+  IntroController(
     this._genreRepository,
     this._movieRepository,
     this._connectivityProvider,
     this._appSharedPreferences,
-  ) : super(const SplashState());
+  ) : super(const IntroState());
 
   // this method is called when the app is started
   // it is used to initialize the app and set the initial state
