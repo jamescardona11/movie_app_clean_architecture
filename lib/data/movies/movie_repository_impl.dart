@@ -29,11 +29,12 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
 
   @override
   Future<AppResult<Unit>> fetchNowPlayingMovies([int page = 1]) async {
+    return AppResult.success(unit);
     return _moviesRequest(nowPlayingTableName, UrlRoutes.nowPlayingMoviesURL, page);
   }
 
   @override
-  Future<void> createOrUpdate(String tableName, MovieEntity movie) async {
+  Future<void> createOrUpdate(MovieEntity movie) async {
     // await upsert(tableName, movie.toDto());
   }
 
@@ -44,9 +45,13 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
   }
 
   @override
-  Stream<List<MovieEntity>> watchMovies() {
-    // TODO: implement watchMovies
-    throw UnimplementedError();
+  Stream<List<MovieEntity>> watchMostPopularMovies() {
+    return watch(popularTableName).map((event) => event.map((e) => MovieDto.fromJson(e.data).toEntity()).toList());
+  }
+
+  @override
+  Stream<List<MovieEntity>> watchMostNowPlayingMovies() {
+    return watch(nowPlayingTableName).map((event) => event.map((e) => MovieDto.fromJson(e.data).toEntity()).toList());
   }
 
   Future<AppResult<Unit>> _moviesRequest(String table, String url, int page) async {
@@ -70,15 +75,16 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
       } else {
         return AppResult.failure(response.appError ?? const UnexpectedError());
       }
-    } catch (e) {
-      AppLogger().e('Error fetching movies from $url', error: e);
+    } catch (e, s) {
+      AppLogger().e('Error fetching movies from $url', error: e.toString(), stackTrace: s);
+
       return AppResult.failure(const UnexpectedError());
     }
   }
 
   Future<void> _createOrUpdateFromRequest(String tableName, JsonType data) async {
     final results = data['results'] as List;
-    final daos = results.map((e) => DbDAO(id: MovieDto.idKey, data: e)).toList();
+    final daos = results.map((e) => DbDAO(id: e[MovieDto.idKey].toString(), data: e)).toList();
 
     await bulkUpsert(tableName, daos);
   }

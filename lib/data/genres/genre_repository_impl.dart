@@ -38,14 +38,14 @@ final class GenreRepositoryImpl with LocalDataSourceMixin implements GenreReposi
         return AppResult.failure(result.appError ?? const UnexpectedError());
       }
     } catch (e) {
-      AppLogger().e('Error fetching genres', error: e);
+      AppLogger().e('Error fetching genres', error: e.toString());
       return AppResult.failure(const UnexpectedError());
     }
   }
 
   Future<void> _createOrUpdate(JsonType data) async {
     final results = data['results'] as List;
-    final daos = results.map((e) => DbDAO(id: GenreDto.idKey, data: e)).toList();
+    final daos = results.map((e) => DbDAO(id: e[GenreDto.idKey].toString(), data: e)).toList();
 
     await bulkUpsert(tableName, daos);
   }

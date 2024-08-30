@@ -6,9 +6,11 @@ abstract interface class MovieRepository {
 
   Future<AppResult<Unit>> fetchNowPlayingMovies([int page = 1]);
 
-  Stream<List<MovieEntity>> watchMovies();
+  Stream<List<MovieEntity>> watchMostPopularMovies();
+
+  Stream<List<MovieEntity>> watchMostNowPlayingMovies();
 
   Stream<MovieEntity?> watchMovieById(int id);
 
-  Future<void> createOrUpdate(String tableName, MovieEntity movie);
+  Future<void> createOrUpdate(MovieEntity movie);
 }
