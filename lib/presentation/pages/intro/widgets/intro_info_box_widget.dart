@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.dart';
+import 'package:movie_app_clean_architecture/config/theme/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroInfoBoxWidget extends StatelessWidget {
@@ -34,10 +35,9 @@ class IntroInfoBoxWidget extends StatelessWidget {
               Column(
                 children: [
                   AnimatedDefaultTextStyle(
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: AppColors.primaryColor,
+                        ),
                     duration: const Duration(milliseconds: 300),
                     child: Text(
                       titles[pageIndex],
@@ -51,7 +51,7 @@ class IntroInfoBoxWidget extends StatelessWidget {
                     subs[pageIndex],
                     style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.secondaryColor,
+                      color: AppColors.onSecondaryColor,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -69,8 +69,8 @@ class IntroInfoBoxWidget extends StatelessWidget {
                       dotWidth: 10.0,
                       dotHeight: 10.0,
                       strokeWidth: 1.5,
-                      dotColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                      activeDotColor: Theme.of(context).colorScheme.primary,
+                      dotColor: AppColors.primaryColor.withOpacity(0.2),
+                      activeDotColor: AppColors.primaryColor,
                     ),
                   ),
                   GestureDetector(
@@ -81,13 +81,16 @@ class IntroInfoBoxWidget extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: AppColors.primaryColor,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
-                      child: const Center(
-                        child: Icon(FontAwesomeIcons.arrowRight),
+                      child: Center(
+                        child: Icon(
+                          FontAwesomeIcons.arrowRight,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -107,6 +110,6 @@ class IntroInfoBoxWidget extends StatelessWidget {
 
   List<String> get subs => [
         'Explore upcoming movies, popular and search for your favorite',
-        'Create many features for your favorite movies',
+        'Create many features for your favorite movies.\nOffline support, Clean Architecture, and more',
       ];
 }

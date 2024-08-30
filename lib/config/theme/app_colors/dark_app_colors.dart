@@ -10,20 +10,20 @@ import 'base_app_colors.dart';
 // References: https://coolors.co/palette/22577a-38a3a5-57cc99-80ed99-c7f9cc
 
 // Color palette
-final class AppLightColors extends BaseAppColors {
-  factory AppLightColors.def() {
-    return const AppLightColors._(
+final class AppDarkColors extends BaseAppColors {
+  factory AppDarkColors.def() {
+    return const AppDarkColors._(
       white: Color(0xfff7f4f4),
       black: Color(0xff000000),
     );
   }
 
-  const AppLightColors._({required super.black, required super.white})
+  const AppDarkColors._({required super.black, required super.white})
       : super(
           // Color scheme
           primary: const Color(0xff1761DF),
           onPrimary: white,
-          secondary: Colors.grey,
+          secondary: Colors.pinkAccent,
           onSecondary: white,
           error: const Color(0xff8c0009),
           onError: white,
@@ -60,7 +60,7 @@ final class AppLightColors extends BaseAppColors {
 
   @override
   ThemeExtension<BaseAppColors> copyWith() {
-    return AppLightColors.def();
+    return AppDarkColors.def();
   }
 
   @override
@@ -69,6 +69,6 @@ final class AppLightColors extends BaseAppColors {
       return this;
     }
 
-    return AppLightColors.def();
+    return AppDarkColors.def();
   }
 }

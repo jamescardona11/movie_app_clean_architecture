@@ -16,8 +16,8 @@ class SplashPage extends StatelessWidget {
           children: [
             const Spacer(),
             const Padding(
-              padding: EdgeInsets.only(top: Dimens.size60, bottom: Dimens.size12),
-              child: AppIcon(size: Dimens.size60),
+              padding: EdgeInsets.only(top: 60, bottom: 12),
+              child: AppIcon(size: 60),
             ),
             Text(
               'Moc App',
@@ -28,7 +28,7 @@ class SplashPage extends StatelessWidget {
               width: 120,
               child: Lottie.asset(AppAssets.lottieLoader),
             ),
-            const SizedBox(height: Dimens.size60),
+            const SizedBox(height: 60),
           ],
         ),
       ),

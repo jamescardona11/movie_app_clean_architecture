@@ -29,6 +29,10 @@ abstract class AppTextTheme {
         fontSize: fontSize500,
         fontWeight: FontWeight.w300,
       ),
+      titleSmall: TextStyle(
+        fontSize: fontSize400,
+        fontWeight: FontWeight.w300,
+      ),
     );
 
     final bodyTextTheme = GoogleFonts.notoSansTextTheme(baseTextTheme);

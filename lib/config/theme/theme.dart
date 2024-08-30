@@ -1,5 +1,5 @@
 export 'app_colors/app_colors.dart';
-export 'app_colors/light_app_colors.dart';
+export 'app_colors/dark_app_colors.dart';
 export 'app_theme.dart';
 export 'text_theme.dart';
 export 'theme_components/appbar_theme_data.dart';

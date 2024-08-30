@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors/base_app_colors.dart';
-import 'app_colors/light_app_colors.dart';
+import 'app_colors/dark_app_colors.dart';
 import 'text_theme.dart';
 import 'theme_components/appbar_theme_data.dart';
 import 'theme_components/icon_theme_data.dart';
 import 'theme_extensions/app_shadow_theme.dart';
 
 abstract class AppTheme {
-  static BaseAppColors colors = AppLightColors.def();
+  static BaseAppColors colors = AppDarkColors.def();
 
   static ThemeData get darkTheme {
-    colors = AppLightColors.def();
+    colors = AppDarkColors.def();
 
     return ThemeData.dark(
       useMaterial3: true,
@@ -30,7 +30,7 @@ abstract class AppTheme {
 
 extension ThemeDataExtension on ThemeData {
   AppShadowTheme get shadows => extension<AppShadowTheme>() ?? AppShadowTheme.def();
-  BaseAppColors get _colors => extension<BaseAppColors>() ?? AppLightColors.def();
+  BaseAppColors get _colors => extension<BaseAppColors>() ?? AppDarkColors.def();
 }
 
 extension ThemeContext on BuildContext {
