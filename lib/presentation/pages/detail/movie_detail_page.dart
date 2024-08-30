@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
@@ -36,33 +38,24 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               fit: StackFit.expand,
               alignment: Alignment.center,
               children: [
-                AnimatedSwitcher(
+                if (state.movies.isNotEmpty)
+                  AnimatedSwitcher(
                     duration: const Duration(milliseconds: 500),
                     child: CachedImage(
                       key: ValueKey<String>(state.movies[currentPage].id.toString()),
                       imageUrl: state.movies[currentPage].imageUrl,
                       radius: 8,
-                    )
-
-                    // Container(
-                    //   key: ValueKey<String>(widget.movies[currentPage].id.toString()),
-                    //   decoration: BoxDecoration(
-                    //     image: DecorationImage(
-                    //       image: AssetImage(tokList[currentPage]),
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    //   child: BackdropFilter(
-                    //     filter: ImageFilter.blur(
-                    //       sigmaX: 15,
-                    //       sigmaY: 15,
-                    //     ),
-                    //     child: Container(
-                    //       color: Colors.black.withOpacity(0.2),
-                    //     ),
-                    //   ),
-                    // ),
                     ),
+                  ),
+                BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 15,
+                    sigmaY: 15,
+                  ),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                ),
                 FractionallySizedBox(
                   heightFactor: 0.5,
                   child: PageView.builder(
