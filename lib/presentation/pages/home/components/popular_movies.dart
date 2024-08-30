@@ -20,43 +20,46 @@ class PopularMovies extends StatefulWidget {
 }
 
 class _PopularMoviesState extends State<PopularMovies> {
-  final ScrollController _scrollController = ScrollController();
+  // final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        widget.onLoadMore();
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          const MoviesHeaderView(
-            title: 'Most Popular',
-          ),
-          CupertinoSliverRefreshControl(
-            onRefresh: widget.onRefresh,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 40),
-            sliver: MoviesListWidget(movies: widget.movies),
-          ),
-        ],
+      child: NotificationListener(
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification && notification.metrics.extentAfter == 0) {
+            // User has reached the end of the list
+            // Load more data or trigger pagination in flutter
+            widget.onLoadMore();
+          }
+          return false;
+        },
+        child: CustomScrollView(
+          // controller: _scrollController,
+          slivers: [
+            const MoviesHeaderView(
+              title: 'Most Popular',
+            ),
+            CupertinoSliverRefreshControl(
+              onRefresh: widget.onRefresh,
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 40),
+              sliver: MoviesListWidget(movies: widget.movies),
+            ),
+            // SliverPadding(
+            //   padding: const EdgeInsets.only(top: 40),
+            //   sliver: MoviesGridViewWidget(movies: widget.movies),
+            // ),
+          ],
+        ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }
