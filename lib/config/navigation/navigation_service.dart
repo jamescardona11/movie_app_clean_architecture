@@ -23,7 +23,12 @@ class NavigationService {
       case intro:
         return MaterialPageRoute(builder: (context) => const IntroPage());
       case home:
-        return MaterialPageRoute(builder: (context) => const HomePage());
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return child;
+          },
+        );
 
       default:
         return MaterialPageRoute(

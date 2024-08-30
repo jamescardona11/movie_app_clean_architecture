@@ -25,6 +25,9 @@ class IntroController extends Moc<IntroState> {
   // it is used to initialize the app and set the initial state
   Future<void> init() async {
     final isFirstTime = await _appSharedPreferences.isFirstTime;
+
+    changeState(state.copyWith(isFirstTime: isFirstTime));
+
     final isConnected = await _connectivityProvider.hasConnection;
 
     if (isFirstTime && isConnected) {
