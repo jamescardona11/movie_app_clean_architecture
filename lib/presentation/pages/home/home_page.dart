@@ -25,7 +25,11 @@ class HomePage extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: PopularMovies(movies: state.popularMovies),
+                child: PopularMovies(
+                  onRefresh: controller.fetchLatestPopularMovies,
+                  onLoadMore: controller.fetchNextPopularMovies,
+                  movies: state.popularMovies,
+                ),
               ),
             ),
             bottomNavigationBar: AppBottomBar(

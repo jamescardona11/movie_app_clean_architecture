@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:movie_app_clean_architecture/core/domain/repository/app_shared_preferences.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_state_management.dart';
+import 'package:movie_app_clean_architecture/core/result/app_result.dart';
 import 'package:movie_app_clean_architecture/domain/repository/movie_repository.dart';
 
 import 'home_state.dart';
@@ -30,4 +31,14 @@ class HomeController extends Moc<HomeState> {
       }),
     );
   }
+
+  Future<void> fetchLatestPopularMovies() => _fetchMovies(1, _movieRepository.fetchMostPopularMovies);
+
+  Future<void> fetchNowPlayingMovies() => _fetchMovies(1, _movieRepository.fetchNowPlayingMovies);
+
+  Future<void> fetchNextPopularMovies() => _fetchMovies(state.popularMoviesPage + 1, _movieRepository.fetchMostPopularMovies);
+
+  Future<void> fetchNextNowPlayingMovies() => _fetchMovies(state.nowPlayingPage + 1, _movieRepository.fetchNowPlayingMovies);
+
+  Future<void> _fetchMovies(int page, Future<AppResult<Unit>> Function([int]) fetchMovies) async {}
 }
