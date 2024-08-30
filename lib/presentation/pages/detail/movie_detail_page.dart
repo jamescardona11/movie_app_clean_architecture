@@ -5,6 +5,7 @@ import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.
 import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/detail/widgets/mark_as_favorite_button.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/rating_widget.dart';
 
 import 'basic_card.dart';
@@ -75,7 +76,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         const Spacer(),
                         Container(
                           width: size.width,
-                          height: 380,
+                          height: 420,
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           decoration: BoxDecoration(
                             color: AppColors.black.withOpacity(0.9),
@@ -154,12 +155,19 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   ),
                                 ],
                               ),
-                              Text(
-                                movie.overview,
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontSize: AppTextTheme.fontSize300,
-                                    ),
+                              Expanded(
+                                child: Text(
+                                  movie.overview,
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                        fontSize: AppTextTheme.fontSize300,
+                                      ),
+                                ),
+                              ),
+                              const Expanded(
+                                child: MarkAsFavoriteButton(
+                                  label: 'Watch Now',
+                                ),
                               ),
                             ],
                           ),
