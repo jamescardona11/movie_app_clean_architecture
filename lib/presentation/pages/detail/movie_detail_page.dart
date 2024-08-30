@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
 import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.dart';
+import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/rating_widget.dart';
@@ -74,6 +76,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         Container(
                           width: size.width,
                           height: 380,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           decoration: BoxDecoration(
                             color: AppColors.black.withOpacity(0.9),
                             borderRadius: const BorderRadius.only(
@@ -82,7 +85,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             ),
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 20),
                               Text(
@@ -93,18 +95,24 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   if (movie.year != null) ...[
+                                    const FaIcon(
+                                      FontAwesomeIcons.calendar,
+                                      size: 15,
+                                      color: Colors.grey,
+                                    ),
+                                    const SizedBox(width: 5),
                                     Text(
                                       movie.year!,
                                       style: Theme.of(context).textTheme.bodyLarge,
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 3),
-                                      child: VerticalDivider(
-                                        thickness: 1.3,
-                                        color: Colors.red,
-                                      ),
-                                    ),
                                   ],
+                                  const SizedBox(width: 10),
+                                  const FaIcon(
+                                    FontAwesomeIcons.language,
+                                    size: 15,
+                                    color: Colors.grey,
+                                  ),
+                                  const SizedBox(width: 5),
                                   Text(
                                     movie.language,
                                     style: Theme.of(context).textTheme.bodyLarge,
@@ -125,9 +133,33 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
-                              RatingWidget(
-                                rating: movie.rating.toStringAsFixed(2),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: RatingWidget(
+                                  rating: movie.rating.toStringAsFixed(2),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Overview',
+                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                              fontSize: AppTextTheme.fontSize600,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                movie.overview,
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontSize: AppTextTheme.fontSize300,
+                                    ),
                               ),
                             ],
                           ),
