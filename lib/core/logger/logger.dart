@@ -15,22 +15,31 @@ class AppLogger {
     _log(text, _LogStatusSuccess());
   }
 
-  void e(String? text, {String? tag, bool showTime = false, StackTrace? stackTrace, Object? error}) {
-    _log(text, _LogStatusError());
+  void e(String? text, {String? tag, bool showTime = false, StackTrace? stackTrace, String? error}) {
+    _log(text, _LogStatusError(), error: error, stackTrace: stackTrace);
   }
 
   void d(String? text, {String? tag, bool showTime = false}) {
     _log(text, _LogStatusDebug());
   }
 
-  void _log(String? text, _LogStatus status, {String? tag, bool showTime = false, StackTrace? stackTrace, Object? error}) {
+  void _log(String? text, _LogStatus status, {String? tag, bool showTime = false, StackTrace? stackTrace, String? error}) {
     String time = showTime ? DateTime.now().toString() : '';
     if (time.isNotEmpty) {
       time = '[$time]';
     }
 
-    final msg = '$time[${status.emoji}] $text';
-    developer.log('${status.color}$msg\x1B[0m', name: tag ?? status.tag, stackTrace: stackTrace, error: error);
+    String msg = '$time[${status.emoji}] $text';
+
+    if (error != null) {
+      msg += '\nError $error';
+    }
+
+    if (stackTrace != null) {
+      msg += '\nStackTrace $stackTrace';
+    }
+
+    developer.log('${status.color}$msg\x1B[0m', name: tag ?? status.tag);
   }
 }
 

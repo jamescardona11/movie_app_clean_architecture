@@ -4,12 +4,13 @@ import 'http_result.dart';
 abstract class BaseHttpClient {
   Future<HttpResult> createRequest(HttpRequestEndpoint request);
 
-  Duration get timeout => const Duration(seconds: 3);
+  Duration get timeout => const Duration(milliseconds: 4000);
 }
 
 bool isSuccessRequest(int? statusCode) =>
     statusCode != null &&
     ![
+      100, // Custom code
       400, // Bad Request
       401, // Unauthorized
       402, // Payment Required
