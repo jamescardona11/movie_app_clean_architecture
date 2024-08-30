@@ -3,24 +3,22 @@ import 'package:movie_app_clean_architecture/core/domain/types/json_type.dart';
 import 'package:sembast/sembast.dart';
 
 mixin LocalDataSourceMixin {
-  String get tableName;
-
   Database get database;
 
-  StoreRef<String, JsonType> get _store => StoreRef<String, JsonType>(tableName);
+  StoreRef<String, JsonType> _store(String tableName) => StoreRef<String, JsonType>(tableName);
 
-  Future<void> upsert(DbDAO dao) => _store.record(dao.id).put(
+  Future<void> upsert(String tableName, DbDAO dao) => _store(tableName).record(dao.id).put(
         database,
         dao.data,
         merge: true,
       );
 
-  Future<void> bulkUpsert(List<DbDAO> daos) async {
+  Future<void> bulkUpsert(String tableName, List<DbDAO> daos) async {
     final ids = daos.map((item) => item.id);
     final data = daos.map((item) => item.data).toList();
 
     return database.transaction((transaction) async {
-      await _store.records(ids).put(
+      await _store(tableName).records(ids).put(
             transaction,
             data,
             merge: true,
@@ -28,9 +26,9 @@ mixin LocalDataSourceMixin {
     });
   }
 
-  Future<void> delete(String id) => _store.record(id).delete(database);
+  Future<void> delete(String tableName, String id) => _store(tableName).record(id).delete(database);
 
-  Future<DbDAO?> read(String id) => _store.record(id).get(database).then((record) {
+  Future<DbDAO?> read(String tableName, String id) => _store(tableName).record(id).get(database).then((record) {
         if (record == null) return null;
 
         return DbDAO(
@@ -39,7 +37,7 @@ mixin LocalDataSourceMixin {
         );
       });
 
-  Stream<DbDAO?> watchOne(String id) => _store.record(id).onSnapshot(database).map(
+  Stream<DbDAO?> watchOne(String tableName, String id) => _store(tableName).record(id).onSnapshot(database).map(
         (snapshot) => snapshot == null
             ? null
             : DbDAO(
@@ -48,7 +46,7 @@ mixin LocalDataSourceMixin {
               ),
       );
 
-  Stream<List<DbDAO>> watch([Finder? finder]) => _store.query(finder: finder).onSnapshots(database).map(
+  Stream<List<DbDAO>> watch(String tableName, [Finder? finder]) => _store(tableName).query(finder: finder).onSnapshots(database).map(
         (snapshots) => snapshots
             .map(
               (e) => DbDAO(
@@ -59,5 +57,8 @@ mixin LocalDataSourceMixin {
             .toList(),
       );
 
-  Future<void> dropTable() => _store.drop(database);
+  Future<void> dropTable(
+    String tableName,
+  ) =>
+      _store(tableName).drop(database);
 }

@@ -13,10 +13,12 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
   MovieRepositoryImpl(this.database, this.httpClient);
 
   @override
-  String get tableName => 'movies';
+  Future<AppResult<Unit>> fetchMostPopularMovies() async {
+    return const AppResultSuccess(unit);
+  }
 
   @override
-  Future<AppResult<Unit>> fetchMovies() async {
+  Future<AppResult<Unit>> fetchNowPlayingMovies() async {
     return const AppResultSuccess(unit);
   }
 
