@@ -7,9 +7,13 @@ class NowPlayingMovies extends StatelessWidget {
   const NowPlayingMovies({
     super.key,
     required this.movies,
+    required this.onRefresh,
+    required this.onLoadMore,
   });
 
   final List<MovieEntity> movies;
+  final Future<void> Function() onRefresh;
+  final VoidCallback onLoadMore;
 
   @override
   Widget build(BuildContext context) {

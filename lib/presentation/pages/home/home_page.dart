@@ -6,35 +6,66 @@ import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bee_bottom_bar.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bottom_bar_item.dart';
 
+import 'components/favorites_movies.dart';
+import 'components/now_playing_movies.dart';
 import 'components/popular_movies.dart';
 import 'controller/home_controller.dart';
 import 'controller/home_state.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final PageController controller = PageController();
+  bool readyToGoHome = false;
+
+  int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return MocProvider(
       create: (context) => getIt<HomeController>()..init(),
       child: MocBuilder<HomeController, HomeState>(
-        builder: (controller, state) {
+        builder: (moc, state) {
           return Scaffold(
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: PopularMovies(
-                  onRefresh: controller.fetchLatestPopularMovies,
-                  onLoadMore: controller.fetchNextPopularMovies,
-                  movies: state.popularMovies,
+                child: PageView.builder(
+                  controller: controller,
+                  itemCount: 3,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return PopularMovies(
+                        onRefresh: moc.fetchLatestPopularMovies,
+                        onLoadMore: moc.fetchNextPopularMovies,
+                        movies: state.popularMovies,
+                      );
+                    } else if (index == 1) {
+                      return NowPlayingMovies(
+                        onRefresh: moc.fetchNowPlayingMovies,
+                        onLoadMore: moc.fetchNextNowPlayingMovies,
+                        movies: state.nowPlaying,
+                      );
+                    } else {
+                      return const FavoritesMovies();
+                    }
+                  },
                 ),
               ),
             ),
             bottomNavigationBar: AppBottomBar(
               items: _itemsBottomBar,
-              onItemSelected: (index) {},
+              onItemSelected: (index) {
+                controller.jumpToPage(index);
+              },
             ),
           );
         },
