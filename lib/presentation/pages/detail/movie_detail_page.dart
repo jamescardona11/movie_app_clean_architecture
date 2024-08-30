@@ -1,14 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/di/di.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
-import 'package:movie_app_clean_architecture/presentation/widgets/cached_image.dart';
 
 import 'basic_card.dart';
 import 'controller/detail_controller.dart';
 import 'controller/detail_state.dart';
+import 'widgets/background_detail_page.dart';
 
 class MovieDetailPage extends StatefulWidget {
   const MovieDetailPage({
@@ -30,6 +28,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: MocProvider(
         create: (context) => getIt<DetailController>()..init(widget.isPopular),
@@ -45,40 +44,34 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               alignment: Alignment.center,
               children: [
                 if (state.movies.isNotEmpty)
-                  CachedImage(
-                    key: ValueKey<String>(state.movies[currentPage].id.toString()),
+                  BackgroundDetailPage(
+                    id: state.movies[currentPage].id.toString(),
                     imageUrl: state.movies[currentPage].imageUrl,
-                    radius: 8,
                   ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 15,
-                    sigmaY: 15,
-                  ),
-                  child: Container(
-                    color: Colors.black.withOpacity(0.2),
-                  ),
-                ),
-                FractionallySizedBox(
-                  heightFactor: 0.5,
-                  child: PageView.builder(
-                    controller: controller,
-                    onPageChanged: (page) {
-                      setState(() {
-                        currentPage = page;
-                      });
-                    },
-                    itemCount: state.movies.length,
-                    itemBuilder: ((_, index) {
-                      return FractionallySizedBox(
-                        widthFactor: 0.8,
-                        child: BasicCard(
-                          imageUrl: state.movies[index].imageUrl,
+                PageView.builder(
+                  controller: controller,
+                  onPageChanged: (page) {
+                    setState(() {
+                      currentPage = page;
+                    });
+                  },
+                  itemCount: state.movies.length,
+                  itemBuilder: ((_, index) {
+                    return Column(
+                      children: [
+                        Flexible(
+                          child: FractionallySizedBox(
+                            heightFactor: 0.35,
+                            widthFactor: 0.7,
+                            child: BasicCard(
+                              imageUrl: state.movies[index].imageUrl,
+                            ),
+                          ),
                         ),
-                      );
-                    }),
-                  ),
-                )
+                      ],
+                    );
+                  }),
+                ),
               ],
             );
           },
