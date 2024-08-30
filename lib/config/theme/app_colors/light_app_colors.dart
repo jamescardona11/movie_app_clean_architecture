@@ -21,9 +21,9 @@ final class AppLightColors extends BaseAppColors {
   const AppLightColors._({required super.black, required super.white})
       : super(
           // Color scheme
-          primary: const Color(0xff4f4200),
+          primary: Colors.pinkAccent,
           onPrimary: white,
-          secondary: const Color(0xff4a4327),
+          secondary: Colors.grey,
           onSecondary: white,
           error: const Color(0xff8c0009),
           onError: white,
