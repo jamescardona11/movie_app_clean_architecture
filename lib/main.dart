@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movie App Clean Architecture',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.darkTheme,
       onGenerateRoute: NavigationService.generateRoutes,
       navigatorKey: NavigationService().navigatorKey,
-      initialRoute: NavigationService.splash,
+      initialRoute: '/',
     );
   }
 }
