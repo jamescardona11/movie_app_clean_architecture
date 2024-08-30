@@ -28,21 +28,36 @@ class IntroController extends Moc<IntroState> {
     final isConnected = await _connectivityProvider.hasConnection;
 
     if (isFirstTime && isConnected) {
-      final results = await Future.wait([
-        _movieRepository.fetchMovies(),
-        _genreRepository.fetchGenres(),
-      ]);
+      await _fetchAll();
 
-      if (results.every((element) => element.isSuccess)) {
-        await _appSharedPreferences.setFirstTimeDone();
-      }
+      await _appSharedPreferences.setFirstTimeDone();
     } else if (isConnected) {
-      final result = await _movieRepository.fetchMovies();
-      if (result.isError) {
-        await _appSharedPreferences.setLastDataOld();
-      }
+      await _fetchMovies();
     }
 
     changeState(state.copyWith(isLoading: false));
+  }
+
+  Future<void> _fetchAll() async {
+    await Future.wait([
+      _movieRepository.fetchMostPopularMovies(),
+      _movieRepository.fetchNowPlayingMovies(),
+      _genreRepository.fetchGenres(),
+    ]);
+  }
+
+  Future<void> _fetchMovies() async {
+    final results = await Future.wait([
+      _movieRepository.fetchMostPopularMovies(),
+      _movieRepository.fetchNowPlayingMovies(),
+    ]);
+
+    if (results[0].isError) {
+      await _appSharedPreferences.setLastPopularOld();
+    }
+
+    if (results[1].isError) {
+      await _appSharedPreferences.setLastDataOld();
+    }
   }
 }
