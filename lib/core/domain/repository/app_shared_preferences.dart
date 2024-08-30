@@ -13,4 +13,7 @@ abstract interface class AppSharedPreferences {
 
   Future<bool> get popularGridView;
   Future<void> setPopularGridView();
+
+  Future<bool> get fistTimeOnDetail;
+  Future<void> setFistTimeOnDetail();
 }

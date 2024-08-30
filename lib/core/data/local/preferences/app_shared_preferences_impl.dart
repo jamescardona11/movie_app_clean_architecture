@@ -12,6 +12,7 @@ class AppSharedPreferencesImpl implements AppSharedPreferences {
   static const String _lastNowPlayingOldKey = 'last_now_playing_old';
   static const String _nowPlayingGridViewKey = 'now_playing_grid_view';
   static const String _popularGridViewKey = 'popular_grid_view';
+  static const String _firstTimeOnDetail = 'first_time_on_detail';
 
   @override
   Future<bool> get isFirstTime => _localSharedPreferencesAdapter.readBool(_firstTimeKey).then((value) => value ?? true);
@@ -48,4 +49,10 @@ class AppSharedPreferencesImpl implements AppSharedPreferences {
     final isGrid = await popularGridView;
     await _localSharedPreferencesAdapter.save(_popularGridViewKey, !isGrid);
   }
+
+  @override
+  Future<bool> get fistTimeOnDetail => _localSharedPreferencesAdapter.readBool(_firstTimeOnDetail).then((value) => value ?? true);
+
+  @override
+  Future<void> setFistTimeOnDetail() => _localSharedPreferencesAdapter.save(_lastPopularOldKey, true);
 }

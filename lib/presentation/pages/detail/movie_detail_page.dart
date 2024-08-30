@@ -26,6 +26,7 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   int currentPage = 0;
+  final PageController controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +34,21 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       body: MocProvider(
         create: (context) => getIt<DetailController>()..init(widget.isPopular),
         child: MocBuilder<DetailController, DetailState>(
+          listener: (moc, state) {
+            if (state.isFistTimeOnDetail) {
+              animatedOnFirstTime();
+            }
+          },
           builder: (moc, state) {
             return Stack(
               fit: StackFit.expand,
               alignment: Alignment.center,
               children: [
                 if (state.movies.isNotEmpty)
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: CachedImage(
-                      key: ValueKey<String>(state.movies[currentPage].id.toString()),
-                      imageUrl: state.movies[currentPage].imageUrl,
-                      radius: 8,
-                    ),
+                  CachedImage(
+                    key: ValueKey<String>(state.movies[currentPage].id.toString()),
+                    imageUrl: state.movies[currentPage].imageUrl,
+                    radius: 8,
                   ),
                 BackdropFilter(
                   filter: ImageFilter.blur(
@@ -59,6 +62,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 FractionallySizedBox(
                   heightFactor: 0.5,
                   child: PageView.builder(
+                    controller: controller,
                     onPageChanged: (page) {
                       setState(() {
                         currentPage = page;
@@ -81,5 +85,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         ),
       ),
     );
+  }
+
+  void animatedOnFirstTime() {
+    Future.delayed(const Duration(milliseconds: 100), () {
+      controller.animateTo(170, duration: const Duration(milliseconds: 300), curve: Curves.ease);
+    });
   }
 }

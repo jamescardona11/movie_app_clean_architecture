@@ -40,7 +40,7 @@ class CachedImage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.tertiaryContainer,
                 );
               },
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.fill,
             )
           : Image.asset(AppAssets.noMovieImage),
     );
