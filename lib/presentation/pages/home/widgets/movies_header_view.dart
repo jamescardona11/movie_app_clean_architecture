@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_clean_architecture/config/res/res.dart';
 
 class MoviesHeaderView extends StatelessWidget {
   const MoviesHeaderView({
@@ -12,29 +13,45 @@ class MoviesHeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 10,
+    return SliverAppBar(
+      expandedHeight: 100.0,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 1.2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-              ),
-              const SizedBox(
-                width: 32,
-              ),
-            ],
+        ),
+        background: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            AppAssets.cinemaBannerImage,
+            fit: BoxFit.cover,
           ),
-        ],
+        ),
       ),
+      floating: false,
+      pinned: true,
+      snap: false,
+      elevation: 10.0,
+      backgroundColor: Colors.transparent,
+      actions: [
+        // IconButton(
+        //   icon: const Icon(CupertinoIcons.search),
+        //   onPressed: () {
+        //     // Search action
+        //   },
+        // ),
+        IconButton(
+          icon: const Icon(Icons.more_vert),
+          onPressed: () {
+            // More options
+          },
+        ),
+      ],
     );
   }
 }
