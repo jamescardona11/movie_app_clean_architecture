@@ -4,5 +4,6 @@ abstract class UrlRoutes {
 
   static get popularMoviesURL => '$_baseMovieApiURL/movie/popular';
   static get nowPlayingMoviesURL => '$_baseMovieApiURL/movie/now_playing';
+
   static get genresURL => '$_baseMovieApiURL/genre/movie/list';
 }

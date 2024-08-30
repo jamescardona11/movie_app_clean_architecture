@@ -32,7 +32,7 @@ class AppHttpClient extends BaseHttpClient {
       data ??= response.bodyBytes;
 
       if (isSuccessRequest(response.statusCode)) {
-        AppLogger().s('Success request $data');
+        // AppLogger().s('Success request $data');
         return HttpResult.success(
           statusCode: response.statusCode,
           headers: response.headers,

@@ -5,6 +5,4 @@ abstract interface class GenreRepository {
   Future<AppResult<Unit>> fetchGenres();
 
   Stream<List<GenreEntity>> watchGenres();
-
-  Future<void> createOrUpdate(List<GenreEntity> genres);
 }

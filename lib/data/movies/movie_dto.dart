@@ -9,7 +9,7 @@ class MovieDto implements BaseDTO {
   @JsonKey(name: 'id')
   final int id;
 
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'original_title')
   final String name;
 
   @JsonKey(name: 'poster_path')
@@ -30,7 +30,7 @@ class MovieDto implements BaseDTO {
   final double voteAverage;
 
   @JsonKey(name: 'status')
-  final String status;
+  final String? status;
 
   const MovieDto({
     required this.id,
@@ -43,6 +43,8 @@ class MovieDto implements BaseDTO {
     required this.voteAverage,
     required this.status,
   });
+
+  static String get idKey => 'id';
 
   @override
   String get dbID => id.toString();

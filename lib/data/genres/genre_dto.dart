@@ -17,6 +17,8 @@ class GenreDto implements BaseDTO {
     required this.name,
   });
 
+  static String get idKey => 'id';
+
   @override
   String get dbID => id.toString();
 

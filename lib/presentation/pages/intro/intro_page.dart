@@ -88,14 +88,15 @@ class _IntroPageState extends State<_IntroPage> {
     /// We need at least 20ms to change the page to wait the controller is finally ready to use
     Future.delayed(const Duration(milliseconds: 20), () {
       controller.jumpToPage(2);
-      delayGoToHome();
+      // delayGoToHome();
     });
   }
 
   void delayGoToHome() {
     /// This time is because I want to wait the page to be ready to go to the home page
+    readyToGoHome = true;
     Future.delayed(const Duration(milliseconds: 500), () {
-      readyToGoHome = true;
+      if (!mounted) return;
 
       final state = context.read<IntroController>().state;
       if (!state.isLoading) {
