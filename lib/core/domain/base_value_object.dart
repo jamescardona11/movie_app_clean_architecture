@@ -22,6 +22,8 @@ abstract base class BaseValueObject<T> with EquatableMixin {
         (r) => r,
       );
 
+  T? getOrNull() => _value.fold((l) => null, (r) => r);
+
   @override
   List<Object?> get props => _value.props;
 
