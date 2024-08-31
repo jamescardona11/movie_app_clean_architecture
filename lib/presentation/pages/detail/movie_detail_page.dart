@@ -121,15 +121,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   ),
                                   Text(
                                     (movie.genreIds.firstOrNull ?? '').toString(),
-                                    style: const TextStyle(
-                                      fontSize: 12,
+                                    style: TextStyle(
+                                      fontSize: AppTextTheme.fontSize100,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   Text(
                                     (movie.status ?? '').toString(),
-                                    style: const TextStyle(
-                                      fontSize: 12,
+                                    style: TextStyle(
+                                      fontSize: AppTextTheme.fontSize100,
                                       color: Colors.grey,
                                     ),
                                   ),

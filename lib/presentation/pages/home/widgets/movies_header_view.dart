@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
+import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 
 class MoviesHeaderView extends StatelessWidget {
   const MoviesHeaderView({
@@ -18,19 +19,30 @@ class MoviesHeaderView extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           title,
-          style: const TextStyle(
-            fontSize: 18.0,
+          style: TextStyle(
+            fontSize: AppTextTheme.fontSize400,
             fontWeight: FontWeight.bold,
             color: Colors.white,
             letterSpacing: 1.2,
           ),
         ),
-        background: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            AppAssets.cinemaBannerImage,
-            fit: BoxFit.cover,
-          ),
+        background: Stack(
+          fit: StackFit.expand,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                AppAssets.cinemaBannerImage,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.75),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ],
         ),
       ),
       floating: false,

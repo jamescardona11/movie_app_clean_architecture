@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.dart';
+import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 
 class RatingWidget extends StatelessWidget {
   const RatingWidget({
@@ -38,7 +39,7 @@ class RatingWidget extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     rating,
-                    style: TextStyle(fontSize: 14, color: AppColors.secondaryColor, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: AppTextTheme.fontSize200, color: AppColors.secondaryColor, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

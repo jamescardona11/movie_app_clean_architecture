@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.dart';
 import 'package:movie_app_clean_architecture/config/theme/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -50,7 +49,7 @@ class IntroInfoBoxWidget extends StatelessWidget {
                   Text(
                     subs[pageIndex],
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: AppTextTheme.fontSize200,
                       color: AppColors.onSecondaryColor,
                     ),
                     textAlign: TextAlign.center,
