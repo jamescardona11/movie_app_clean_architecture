@@ -5,6 +5,7 @@ import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bee_bottom_bar.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bottom_bar_item.dart';
+import 'package:movie_app_clean_architecture/presentation/widgets/toast/custom_toasts.dart';
 
 import 'components/favorites/favorites_movies.dart';
 import 'components/movies_items_page.dart';
@@ -31,6 +32,11 @@ class _HomePageState extends State<HomePage> {
     return MocProvider(
       create: (context) => getIt<HomeController>()..init(),
       child: MocBuilder<HomeController, HomeState>(
+        listener: (moc, state) {
+          if (state.error != null) {
+            CustomToasts.showCustomMessage(context, state.error!.message);
+          }
+        },
         builder: (moc, state) {
           return Scaffold(
             body: SafeArea(

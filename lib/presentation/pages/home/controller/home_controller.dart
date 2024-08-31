@@ -47,13 +47,30 @@ class HomeController extends Moc<HomeState> {
     changeState(state.copyWith(isPopularGridView: !state.isPopularGridView));
   }
 
-  Future<void> fetchLatestPopularMovies() => _fetchMovies(1, _movieRepository.fetchMostPopularMovies);
+  Future<void> fetchLatestPopularMovies() => _fetchMovies(1, _movieRepository.fetchMostPopularMovies, true);
 
   Future<void> fetchNowPlayingMovies() => _fetchMovies(1, _movieRepository.fetchNowPlayingMovies);
 
-  Future<void> fetchNextPopularMovies() => _fetchMovies(state.popularMoviesPage + 1, _movieRepository.fetchMostPopularMovies);
+  Future<void> fetchNextPopularMovies() => _fetchMovies(state.popularMoviesPage + 1, _movieRepository.fetchMostPopularMovies, true);
 
   Future<void> fetchNextNowPlayingMovies() => _fetchMovies(state.nowPlayingPage + 1, _movieRepository.fetchNowPlayingMovies);
 
-  Future<void> _fetchMovies(int page, Future<AppResult<Unit>> Function([int]) fetchMovies) async {}
+  Future<void> _fetchMovies(int page, Future<AppResult<Unit>> Function([int]) fetchMovies, [bool isPopular = false]) async {
+    changeState(
+      state.copyWith(
+        isLoading: true,
+        popularMoviesPage: isPopular && page > 1 ? page : null,
+        nowPlayingPage: !isPopular && page > 1 ? page : null,
+      ),
+    );
+    final response = await fetchMovies(page);
+
+    if (response.isError) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        changeState(state.copyWith(error: null));
+      });
+    }
+
+    changeState(state.copyWith(isLoading: false));
+  }
 }
