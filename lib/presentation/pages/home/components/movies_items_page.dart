@@ -9,6 +9,7 @@ class MoviesItemsPage extends StatelessWidget {
     super.key,
     required this.movies,
     required this.isLoading,
+    required this.isError,
     required this.onRefresh,
     required this.onLoadMore,
     required this.title,
@@ -18,6 +19,7 @@ class MoviesItemsPage extends StatelessWidget {
 
   final String title;
   final bool isLoading;
+  final bool isError;
   final bool isGridView;
   final List<MovieEntity> movies;
   final Future<void> Function() onRefresh;
@@ -42,6 +44,7 @@ class MoviesItemsPage extends StatelessWidget {
             MoviesHeaderView(
               title: title,
               isLoading: isLoading,
+              isError: isError,
               isGridView: isGridView,
               onToggleGridView: onToggleGridView,
             ),

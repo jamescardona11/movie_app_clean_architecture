@@ -67,7 +67,7 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
             'include_adult': 'false',
             'include_video': 'false',
             'language': 'en-US',
-            'page': 2.toString(),
+            'page': page.toString(),
           },
         ),
       );

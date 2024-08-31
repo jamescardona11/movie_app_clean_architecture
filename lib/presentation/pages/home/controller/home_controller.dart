@@ -66,11 +66,13 @@ class HomeController extends Moc<HomeState> {
     final response = await fetchMovies(page);
 
     if (response.isError) {
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 1000), () {
         changeState(state.copyWith(error: null));
       });
     }
 
-    changeState(state.copyWith(isLoading: false));
+    Future.delayed(const Duration(milliseconds: 500), () {
+      changeState(state.copyWith(isLoading: false));
+    });
   }
 }
