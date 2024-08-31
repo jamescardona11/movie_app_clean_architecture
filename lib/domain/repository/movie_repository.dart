@@ -10,7 +10,5 @@ abstract interface class MovieRepository {
 
   Stream<List<MovieEntity>> watchMostNowPlayingMovies();
 
-  Stream<MovieEntity?> watchMovieById(int id);
-
   Future<void> createOrUpdate(MovieEntity movie);
 }

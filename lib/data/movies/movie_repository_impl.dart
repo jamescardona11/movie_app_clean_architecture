@@ -29,7 +29,6 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
 
   @override
   Future<AppResult<Unit>> fetchNowPlayingMovies([int page = 1]) async {
-    return AppResult.success(unit);
     return _moviesRequest(nowPlayingTableName, UrlRoutes.nowPlayingMoviesURL, page);
   }
 
@@ -46,12 +45,6 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
     if (existsNowPlaying) {
       await upsert(nowPlayingTableName, DbDAO(id: movie.id.toString(), data: dto.toJson()));
     }
-  }
-
-  @override
-  Stream<MovieEntity?> watchMovieById(int id) {
-    // TODO: implement watchMovieById
-    throw UnimplementedError();
   }
 
   @override
