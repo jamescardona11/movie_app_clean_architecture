@@ -1,16 +1,21 @@
-# movie_app_clean_architecture
+# Movie App Clean Architecture
 
-A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run the project, you need to following the next steps:
 
-A few resources to get you started if this is your first Flutter project:
+- Clone the project
+- Run `flutter pub get`
+- Have a API key from [TMDB](https://www.themoviedb.org/documentation/api)
+- Create a file named `.env`, use the `.env.template` as a example
+- Run `dart run build_runner build -d`
+- Run `flutter run`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="screenshots/screenshoot1.png" width="425"/> 
+
+<img src="screenshots/screenshoot2.png" width="425"/> 
+
+<img src="screenshots/screenshoot3.png" width="425"/>  
