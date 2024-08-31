@@ -18,7 +18,7 @@ class MoviesHeaderView extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -39,12 +39,6 @@ class MoviesHeaderView extends StatelessWidget {
       elevation: 10.0,
       backgroundColor: Colors.transparent,
       actions: [
-        // IconButton(
-        //   icon: const Icon(CupertinoIcons.search),
-        //   onPressed: () {
-        //     // Search action
-        //   },
-        // ),
         IconButton(
           icon: const Icon(Icons.more_vert),
           onPressed: () {

@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart';
 
-// ```
-// BounceWrapper(
-//   child: Container(
-//     width: 100,
-//     height: 40,
-//     color: Colors.amber,
-//     child: const Center(
-//       child: Text('Widget'),
-//     ),
-//   ),
-// )
-// ```
-
 class BounceWrapper extends StatefulWidget {
   const BounceWrapper({
     super.key,
     required this.child,
-    this.scale = 0.12,
+    this.scale = 0.2,
     this.onPressed,
-    this.duration = const Duration(milliseconds: 200),
   });
 
   final Widget child;
   final double scale;
   final VoidCallback? onPressed;
-  final Duration duration;
 
   @override
   BounceWrapperState createState() => BounceWrapperState();
@@ -35,12 +20,14 @@ class BounceWrapperState extends State<BounceWrapper> with SingleTickerProviderS
   late double _scale;
   late AnimationController _animate;
 
+  final duration = const Duration(milliseconds: 200);
+
   @override
   void initState() {
     //defining the controller
     _animate = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 250),
+      duration: duration,
       lowerBound: 0.0,
       upperBound: widget.scale,
     )..addListener(() {
@@ -63,12 +50,11 @@ class BounceWrapperState extends State<BounceWrapper> with SingleTickerProviderS
   }
 
   void _onTap() {
-    _animate.forward();
+    widget.onPressed?.call();
+    _animate.forward(from: 0.0);
 
-    //Now reversing the animation after the user defined duration
-    Future.delayed(widget.duration, () {
+    Future.delayed(duration, () {
       _animate.reverse();
-      widget.onPressed?.call();
     });
   }
 
