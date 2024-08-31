@@ -6,7 +6,7 @@ import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bee_bottom_bar.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/bottom_bar/bottom_bar_item.dart';
 
-import 'components/favorites_movies.dart';
+import 'components/favorites/favorites_movies.dart';
 import 'components/movies_items_page.dart';
 import 'controller/home_controller.dart';
 import 'controller/home_state.dart';

@@ -54,7 +54,7 @@ class MoviesHeaderView extends StatelessWidget {
       pinned: true,
       snap: false,
       elevation: 10.0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       actions: [
         if (isLoading) Text('Loading...', style: Theme.of(context).textTheme.bodyMedium),
         IconButton(
