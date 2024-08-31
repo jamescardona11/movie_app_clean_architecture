@@ -8,7 +8,6 @@ import 'package:movie_app_clean_architecture/core/errors/app_error.dart';
 import 'package:movie_app_clean_architecture/core/logger/logger.dart';
 import 'package:movie_app_clean_architecture/core/result/app_result.dart';
 import 'package:movie_app_clean_architecture/data/genres/genre_dto.dart';
-import 'package:movie_app_clean_architecture/domain/entities/genre_entity.dart';
 import 'package:movie_app_clean_architecture/domain/repository/genre_repository.dart';
 import 'package:sembast/sembast.dart';
 
@@ -48,11 +47,5 @@ final class GenreRepositoryImpl with LocalDataSourceMixin implements GenreReposi
     final daos = results.map((e) => DbDAO(id: e[GenreDto.idKey].toString(), data: e)).toList();
 
     await bulkUpsert(tableName, daos);
-  }
-
-  @override
-  Stream<List<GenreEntity>> watchGenres() {
-    // TODO: implement watchGenres
-    throw UnimplementedError();
   }
 }
