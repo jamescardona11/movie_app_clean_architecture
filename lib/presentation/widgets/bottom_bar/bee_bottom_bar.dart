@@ -179,12 +179,12 @@ class _BottomBarItemState extends State<_BottomBarItem> with SingleTickerProvide
             height: 50,
             decoration: BoxDecoration(
               borderRadius: widget.isSpecial ? const BorderRadius.all(Radius.circular(15)) : null,
-              color: widget.isSpecial ? AppColors.onPrimaryColor : Colors.transparent,
+              color: widget.isSpecial ? Colors.grey[300] : Colors.transparent,
             ),
             child: Center(
               child: Icon(
                 widget.item.icon,
-                color: iconColor,
+                color: widget.isSpecial && !widget.isSelected ? Colors.black : iconColor,
               ),
             ),
           ),
