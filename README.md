@@ -12,7 +12,12 @@ To run the project, you need to following the next steps:
 - Run `dart run build_runner build -d`
 - Run `flutter run`
 
+## VIDEO
+
+You can check the screencast usign the file called: screenrecording.mov
+
 ## Screenshots
+
 
 <img src="screenshots/screenshoot1.png" width="425"/> 
 
