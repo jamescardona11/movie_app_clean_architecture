@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/theme/app_colors/app_colors.dart';
-
-import '../../../widgets/bounce_wrapper.dart';
+import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
+import 'package:movie_app_clean_architecture/presentation/widgets/bounce_wrapper.dart';
 
 class MarkAsFavoriteButton extends StatelessWidget {
   const MarkAsFavoriteButton({
     super.key,
     required this.label,
+    required this.onPressed,
+    required this.isFavorite,
   });
 
   final String label;
+  final bool isFavorite;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +34,17 @@ class MarkAsFavoriteButton extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(40),
               ),
-              child: const Center(
+              child: Center(
                 child: FaIcon(
-                  FontAwesomeIcons.star,
-                  color: Colors.black54,
+                  isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
+                  color: isFavorite ? AppColors.primaryColor : Colors.black54,
                 ),
               ),
             ),
             const SizedBox(width: 20),
             Expanded(
               child: BounceWrapper(
+                onPressed: onPressed,
                 child: Container(
                   width: 80,
                   height: 50,
@@ -50,15 +55,15 @@ class MarkAsFavoriteButton extends StatelessWidget {
                   child: Center(
                     child: Text(
                       label,
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: AppTextTheme.fontSize400,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -86,7 +86,7 @@ class MovieListItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 3),
                     Text(
-                      movie.releaseDate?.year.toString() ?? '',
+                      movie.year ?? '',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey,

@@ -19,19 +19,18 @@ class DetailController extends Moc<DetailState> {
   // it is used to initialize the app and set the initial state
   Future<void> init(bool isPopular) async {
     unawaited(_firstTimeOnDetail());
-    if (isPopular) {
-      safeSubscribe(
-        _movieRepository.watchMostPopularMovies().listen((event) {
-          changeState(state.copyWith(movies: event));
-        }),
-      );
-    } else {
-      safeSubscribe(
-        _movieRepository.watchMostNowPlayingMovies().listen((event) {
-          changeState(state.copyWith(movies: event));
-        }),
-      );
-    }
+    final moviesStream = isPopular ? _movieRepository.watchMostPopularMovies() : _movieRepository.watchMostNowPlayingMovies();
+
+    safeSubscribe(
+      moviesStream.listen((event) {
+        changeState(state.copyWith(movies: event));
+      }),
+    );
+  }
+
+  Future<void> markAsFavorite(int id) async {
+    final movie = state.movies.firstWhere((element) => element.id == id);
+    await _movieRepository.createOrUpdate(movie.markAsFavorite());
   }
 
   Future<void> _firstTimeOnDetail() async {

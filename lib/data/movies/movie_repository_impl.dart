@@ -35,7 +35,17 @@ final class MovieRepositoryImpl with LocalDataSourceMixin implements MovieReposi
 
   @override
   Future<void> createOrUpdate(MovieEntity movie) async {
-    // await upsert(tableName, movie.toDto());
+    final dto = MovieDto.fromEntity(movie);
+
+    final existsPopularMovie = await read(popularTableName, movie.id.toString()).then((value) => value != null);
+    final existsNowPlaying = await read(popularTableName, movie.id.toString()).then((value) => value != null);
+
+    if (existsPopularMovie) {
+      await upsert(popularTableName, DbDAO(id: movie.id.toString(), data: dto.toJson()));
+    }
+    if (existsNowPlaying) {
+      await upsert(nowPlayingTableName, DbDAO(id: movie.id.toString(), data: dto.toJson()));
+    }
   }
 
   @override

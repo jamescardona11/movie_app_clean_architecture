@@ -6,6 +6,7 @@ import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_builder.dart';
 import 'package:movie_app_clean_architecture/core/provider/moc_provider.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/detail/widgets/mark_as_favorite_button.dart';
+import 'package:movie_app_clean_architecture/presentation/widgets/back_button_widget.dart';
 import 'package:movie_app_clean_architecture/presentation/widgets/rating_widget.dart';
 
 import 'basic_card.dart';
@@ -164,9 +165,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                       ),
                                 ),
                               ),
-                              const Expanded(
+                              Expanded(
                                 child: MarkAsFavoriteButton(
-                                  label: 'Watch Now',
+                                  label: 'Save as Favorite',
+                                  isFavorite: movie.isFavorite,
+                                  onPressed: () => moc.markAsFavorite(movie.id),
                                 ),
                               ),
                             ],
@@ -175,6 +178,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       ],
                     );
                   }),
+                ),
+                Positioned(
+                  top: 60,
+                  left: 20,
+                  child: BackButtonWidget(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ],
             );
