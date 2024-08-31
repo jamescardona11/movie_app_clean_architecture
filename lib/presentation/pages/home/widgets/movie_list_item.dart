@@ -53,12 +53,8 @@ class MovieListItem extends StatelessWidget {
                 Positioned(
                   right: 5,
                   top: 5,
-                  child: Column(
-                    children: [
-                      RatingWidget(
-                        rating: movie.rating.toStringAsFixed(2),
-                      ),
-                    ],
+                  child: RatingWidget(
+                    rating: movie.rating.toStringAsFixed(2),
                   ),
                 ),
               ],

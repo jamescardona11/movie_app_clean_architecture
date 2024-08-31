@@ -13,6 +13,7 @@ class CachedImage extends StatelessWidget {
     this.topRightRadius = 0,
     this.bottomLeftRadius = 0,
     this.bottomRightRadius = 0,
+    this.fit = BoxFit.fill,
   });
 
   final UrlVO imageUrl;
@@ -21,6 +22,7 @@ class CachedImage extends StatelessWidget {
   final double topRightRadius;
   final double bottomLeftRadius;
   final double bottomRightRadius;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class CachedImage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.error,
                 );
               },
-              fit: BoxFit.fill,
+              fit: fit,
             )
           : Image.asset(AppAssets.noMovieImage),
     );
