@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
 import 'package:movie_app_clean_architecture/config/theme/text_theme.dart';
 
@@ -7,9 +8,11 @@ class MoviesHeaderView extends StatelessWidget {
     super.key,
     required this.title,
     this.listView = true,
+    this.isLoading = false,
   });
 
   final String title;
+  final bool isLoading;
   final bool listView;
 
   @override
@@ -51,8 +54,9 @@ class MoviesHeaderView extends StatelessWidget {
       elevation: 10.0,
       backgroundColor: Colors.transparent,
       actions: [
+        if (isLoading) Text('Loading...', style: Theme.of(context).textTheme.bodyMedium),
         IconButton(
-          icon: const Icon(Icons.more_vert),
+          icon: !listView ? const Icon(FontAwesomeIcons.list) : const Icon(FontAwesomeIcons.gripVertical),
           onPressed: () {
             // More options
           },
