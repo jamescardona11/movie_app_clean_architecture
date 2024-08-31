@@ -14,24 +14,20 @@ class HttpResult {
   // Response
   final dynamic data;
   final int? statusCode;
-  final Map<String, dynamic>? headers;
 
   HttpResult._({
     required this.originalRequest,
     this.data,
-    this.headers,
     this.statusCode,
     this.appError,
   });
 
   factory HttpResult.success({
     required dynamic data,
-    required Map<String, dynamic> headers,
     required HttpRequestEndpoint originalRequest,
     int? statusCode,
   }) =>
       HttpResult._(
-        headers: headers,
         data: data,
         originalRequest: originalRequest,
         statusCode: statusCode,
@@ -40,12 +36,10 @@ class HttpResult {
   factory HttpResult.failure({
     required dynamic error,
     required HttpRequestEndpoint originalRequest,
-    Map<String, dynamic> headers = const {},
     int? statusCode,
     StackTrace? stackTrace,
   }) =>
       HttpResult._(
-        headers: headers,
         originalRequest: originalRequest,
         statusCode: statusCode,
         appError: AppRemoteError.fromError(error, stackTrace, statusCode),
@@ -70,7 +64,7 @@ class HttpResult {
   @override
   String toString() {
     if (isSuccess) {
-      return 'SuccessResult(\nstatusCode: $statusCode, data: $data, headers: ${headers.toString()}\n)';
+      return 'SuccessResult(\nstatusCode: $statusCode, data: $data, }\n)';
     }
 
     return 'FailureResult \nstatusCode: $statusCode, \nError: ${appError?.toString()}';
