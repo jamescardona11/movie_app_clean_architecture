@@ -30,6 +30,21 @@ class HomeController extends Moc<HomeState> {
         changeState(state.copyWith(nowPlaying: event));
       }),
     );
+
+    final isPopularGridView = await _appSharedPreferences.popularGridView;
+    final isNowPlayingGridView = await _appSharedPreferences.nowPlayingGridView;
+
+    changeState(state.copyWith(isPopularGridView: isPopularGridView, isNowPlayingGridView: isNowPlayingGridView));
+  }
+
+  Future<void> toggleNowPlayingGridView() async {
+    await _appSharedPreferences.setNowPlayingGridView();
+    changeState(state.copyWith(isNowPlayingGridView: !state.isNowPlayingGridView));
+  }
+
+  Future<void> togglePopularGridView() async {
+    await _appSharedPreferences.setPopularGridView();
+    changeState(state.copyWith(isPopularGridView: !state.isPopularGridView));
   }
 
   Future<void> fetchLatestPopularMovies() => _fetchMovies(1, _movieRepository.fetchMostPopularMovies);

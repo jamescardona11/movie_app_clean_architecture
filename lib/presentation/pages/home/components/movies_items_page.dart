@@ -1,31 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_app_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:movie_app_clean_architecture/presentation/pages/home/widgets/movies_grid_widget.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/home/widgets/movies_header_view.dart';
 import 'package:movie_app_clean_architecture/presentation/pages/home/widgets/movies_list_widget.dart';
 
-class PopularMovies extends StatefulWidget {
-  const PopularMovies({
+class MoviesItemsPage extends StatelessWidget {
+  const MoviesItemsPage({
     super.key,
     required this.movies,
+    required this.isLoading,
     required this.onRefresh,
     required this.onLoadMore,
+    required this.title,
+    required this.isGridView,
+    required this.onToggleGridView,
   });
 
+  final String title;
+  final bool isLoading;
+  final bool isGridView;
   final List<MovieEntity> movies;
   final Future<void> Function() onRefresh;
   final VoidCallback onLoadMore;
-
-  @override
-  State<PopularMovies> createState() => _PopularMoviesState();
-}
-
-class _PopularMoviesState extends State<PopularMovies> {
-  // final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  final VoidCallback onToggleGridView;
 
   @override
   Widget build(BuildContext context) {
@@ -36,27 +33,31 @@ class _PopularMoviesState extends State<PopularMovies> {
           if (notification is ScrollEndNotification && notification.metrics.extentAfter == 0) {
             // User has reached the end of the list
             // Load more data or trigger pagination in flutter
-            widget.onLoadMore();
+            onLoadMore();
           }
           return false;
         },
         child: CustomScrollView(
-          // controller: _scrollController,
           slivers: [
-            const MoviesHeaderView(
-              title: 'Most Popular',
+            MoviesHeaderView(
+              title: title,
+              isLoading: isLoading,
+              isGridView: isGridView,
+              onToggleGridView: onToggleGridView,
             ),
             CupertinoSliverRefreshControl(
-              onRefresh: widget.onRefresh,
+              onRefresh: onRefresh,
             ),
-            SliverPadding(
-              padding: const EdgeInsets.only(top: 40),
-              sliver: MoviesListWidget(movies: widget.movies),
-            ),
-            // SliverPadding(
-            //   padding: const EdgeInsets.only(top: 40),
-            //   sliver: MoviesGridViewWidget(movies: widget.movies),
-            // ),
+            if (isGridView)
+              SliverPadding(
+                padding: const EdgeInsets.only(top: 40),
+                sliver: MoviesGridViewWidget(movies: movies),
+              )
+            else
+              SliverPadding(
+                padding: const EdgeInsets.only(top: 40),
+                sliver: MoviesListWidget(movies: movies),
+              ),
           ],
         ),
       ),

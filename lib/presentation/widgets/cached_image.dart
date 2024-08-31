@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_architecture/config/res/res.dart';
+import 'package:movie_app_clean_architecture/config/theme/theme.dart';
 import 'package:movie_app_clean_architecture/domain/value_objects/url_vo.dart';
 
 class CachedImage extends StatelessWidget {
@@ -32,12 +33,12 @@ class CachedImage extends StatelessWidget {
               imageUrl: imageUrl.getOrElse(''),
               placeholder: (context, url) {
                 return Container(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: AppColors.primaryColor,
                 );
               },
               errorWidget: (context, url, error) {
                 return Container(
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.error,
                 );
               },
               fit: BoxFit.fill,

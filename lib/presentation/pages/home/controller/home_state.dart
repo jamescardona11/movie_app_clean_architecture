@@ -9,14 +9,18 @@ class HomeState extends Equatable {
   final int popularMoviesPage;
   final List<MovieEntity> nowPlaying;
   final int nowPlayingPage;
+  final bool isPopularGridView;
+  final bool isNowPlayingGridView;
 
   const HomeState({
-    this.isLoading = true,
+    this.isLoading = false,
     this.error,
     this.popularMovies = const [],
     this.nowPlaying = const [],
     this.popularMoviesPage = 1,
     this.nowPlayingPage = 1,
+    this.isPopularGridView = false,
+    this.isNowPlayingGridView = false,
   });
 
   @override
@@ -25,6 +29,8 @@ class HomeState extends Equatable {
         error,
         popularMovies,
         nowPlaying,
+        isPopularGridView,
+        isNowPlayingGridView,
       ];
 
   HomeState copyWith({
@@ -34,6 +40,8 @@ class HomeState extends Equatable {
     List<MovieEntity>? nowPlaying,
     int? popularMoviesPage,
     int? nowPlayingPage,
+    bool? isPopularGridView,
+    bool? isNowPlayingGridView,
   }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
@@ -42,6 +50,8 @@ class HomeState extends Equatable {
       nowPlaying: nowPlaying ?? this.nowPlaying,
       popularMoviesPage: popularMoviesPage ?? this.popularMoviesPage,
       nowPlayingPage: nowPlayingPage ?? this.nowPlayingPage,
+      isPopularGridView: isPopularGridView ?? this.isPopularGridView,
+      isNowPlayingGridView: isNowPlayingGridView ?? this.isNowPlayingGridView,
     );
   }
 }

@@ -7,13 +7,15 @@ class MoviesHeaderView extends StatelessWidget {
   const MoviesHeaderView({
     super.key,
     required this.title,
-    this.listView = true,
+    this.isGridView = true,
     this.isLoading = false,
+    required this.onToggleGridView,
   });
 
   final String title;
   final bool isLoading;
-  final bool listView;
+  final bool isGridView;
+  final VoidCallback onToggleGridView;
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +58,8 @@ class MoviesHeaderView extends StatelessWidget {
       actions: [
         if (isLoading) Text('Loading...', style: Theme.of(context).textTheme.bodyMedium),
         IconButton(
-          icon: !listView ? const Icon(FontAwesomeIcons.list) : const Icon(FontAwesomeIcons.gripVertical),
-          onPressed: () {
-            // More options
-          },
+          icon: isGridView ? const Icon(FontAwesomeIcons.list) : const Icon(FontAwesomeIcons.gripVertical),
+          onPressed: onToggleGridView,
         ),
       ],
     );

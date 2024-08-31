@@ -24,7 +24,7 @@ class RatingWidget extends StatelessWidget {
             Radius.circular(8),
           ),
           child: ColoredBox(
-            color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+            color: AppColors.black.withOpacity(0.6),
             child: SizedBox(
               height: 32,
               width: 55,
