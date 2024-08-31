@@ -15,6 +15,7 @@ class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return GestureDetector(
       onTap: () {
         NavigationService().pushTo(
@@ -71,60 +72,57 @@ class MovieListItem extends StatelessWidget {
                   width: MediaQuery.of(context).size.width - 170,
                   child: Text(
                     movie.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const SizedBox(height: 12),
                 Row(
                   children: [
-                    FaIcon(
+                    const FaIcon(
                       FontAwesomeIcons.calendar,
+                      size: 15,
+                      color: Colors.grey,
                     ),
-                    const SizedBox(width: 3),
+                    const SizedBox(width: 5),
                     Text(
-                      movie.year ?? '',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
+                      movie.year!,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),
-                const SizedBox(height: 15),
-                SizedBox(
-                  height: 16,
-                  child: Row(
-                    children: [
-                      FaIcon(
-                        FontAwesomeIcons.film,
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    const FaIcon(
+                      FontAwesomeIcons.language,
+                      size: 15,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      movie.language,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const FaIcon(
+                      FontAwesomeIcons.film,
+                      size: 15,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 5),
+                    SizedBox(
+                      width: size.width * 0.4,
+                      child: Text(
+                        movie.overview,
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      const SizedBox(width: 3),
-                      Text(
-                        movie.genreIds.join(', '),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      const SizedBox(width: 3),
-                      const VerticalDivider(
-                        thickness: 1.3,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        movie.status?.toUpperCase() ?? '',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
